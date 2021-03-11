@@ -14,6 +14,14 @@ class TekEvent {
     String toString() {
         "$name, $city"
     }
+
     static constraints = {
+        name()
+        city()
+        description maxSize: 5000
+        organizer()
+        venue()
+        startDate()
+        endDate()
     }
 }
