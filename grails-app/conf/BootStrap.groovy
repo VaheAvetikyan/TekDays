@@ -1,11 +1,37 @@
 import com.tekdays.TekEvent
+import com.tekdays.TekUser
 
 class BootStrap {
 
     def init = { servletContext ->
+
+        new TekUser(fullName: 'Vahe Avetikyan',
+                userName: 'VaheA',
+                password: 't0ps3cr3t',
+                email: 'vahe@mail.com',
+                website: 'blog.vahe.com',
+                bio: '''Vahe has been programming for over 1.5 years. He has
+                            worked with every programming language known to man.''').save()
+
+        new TekUser(fullName: 'Arm Marathon Foundation',
+                userName: 'ArmMarathon',
+                password: 't0ps3cr3t',
+                email: 'info@armmarathon.org',
+                website: 'armeniamarathon.org',
+                bio: '''Arm Marathon Foundation organizes a number of running 
+                        events in Armenia throughout the year.''').save()
+
+        new TekUser(fullName: 'Startup Armenia',
+                userName: 'StartupArm',
+                password: 't0ps3cr3t',
+                email: 'info@startupfund.am',
+                website: 'startuparmenia.am',
+                bio: '''The mission of Startup Armenia Foundation is to support 
+                        startups and founders at all stages of startup development.''').save()
+
         def summit = new TekEvent(name: 'Sevan StartUp Summit',
                 city: 'Sevan, Gegharkunik, Armenia',
-                organizer: 'Startup Armenia',
+                organizer: TekUser.findByFullName('Startup Armenia'),
                 venue: 'Drakhtik',
                 startDate: new Date('07/26/2021'),
                 endDate: new Date('08/01/2021'),
@@ -20,9 +46,10 @@ class BootStrap {
                 println "An error occured with summit: ${error}"
             }
         }
+
         def marathon = new TekEvent(name: 'Yerevan Marathon',
                 city: 'Yerevan, Armenia',
-                organizer: 'Arm Marathon Foundation',
+                organizer: TekUser.findByFullName('Arm Marathon Foundation'),
                 venue: 'Yerevan',
                 startDate: new Date('10/2/2019'),
                 endDate: new Date('10/2/2019'),
@@ -38,6 +65,7 @@ class BootStrap {
             }
         }
     }
+
     def destroy = {
     }
 }
