@@ -17,7 +17,7 @@ class TekUser {
     static constraints = {
         fullName()
         userName()
-        email()
+        email email: true
         website()
         bio maxSize: 5000
     }
