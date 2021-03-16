@@ -8,7 +8,7 @@ class BootStrap {
                 userName: 'VaheA',
                 password: 't0ps3cr3t',
                 email: 'vahe@mail.com',
-                website: 'www.blog.vahe.com',
+                website: 'https://www.blog.vahe.com',
                 bio: '''Vahe has been programming for over 1.5 years. He has
                         worked with every programming language known to man.''').save()
 
@@ -16,7 +16,7 @@ class BootStrap {
                 userName: 'ArmMarathon',
                 password: 't0ps3cr3t',
                 email: 'info@armmarathon.org',
-                website: 'www.armeniamarathon.org',
+                website: 'https://www.armeniamarathon.org',
                 bio: '''Arm Marathon Foundation organizes a number of running 
                         events in Armenia throughout the year.''').save()
 
@@ -24,7 +24,7 @@ class BootStrap {
                 userName: 'StartupArm',
                 password: 't0ps3cr3t',
                 email: 'info@startupfund.am',
-                website: 'www.startuparmenia.am',
+                website: 'https://www.startuparmenia.am',
                 bio: '''The mission of Startup Armenia Foundation is to support 
                         startups and founders at all stages of startup development.''').save()
 

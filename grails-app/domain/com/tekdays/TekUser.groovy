@@ -15,10 +15,10 @@ class TekUser {
     }
 
     static constraints = {
-        fullName()
-        userName()
-        email email: true
-        website()
+        fullName blank: false
+        userName blank: false, nullable: false, unique: true
+        email email: true, nullable: false, unique: true
+        website url: true, nullable: true
         bio maxSize: 5000
     }
 }
