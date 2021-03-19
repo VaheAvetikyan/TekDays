@@ -31,9 +31,9 @@ class TekEvent {
         startDate()
         endDate()
         sponsors nullable: true
+        sponsorships nullable: true
         volunteers nullable: true
         respondents blank: true
-        sponsorships nullable: true
         tasks nullable: true
         messages nullable: true
     }

@@ -5,9 +5,9 @@ package com.tekdays
 import grails.test.mixin.*
 import spock.lang.*
 
-@TestFor(TekUserController)
-@Mock(TekUser)
-class TekUserControllerSpec extends Specification {
+@TestFor(TaskController)
+@Mock(Task)
+class TaskControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
@@ -21,8 +21,8 @@ class TekUserControllerSpec extends Specification {
             controller.index()
 
         then:"The model is correct"
-            !model.tekUserInstanceList
-            model.tekUserInstanceCount == 0
+            !model.taskInstanceList
+            model.taskInstanceCount == 0
     }
 
     void "Test the create action returns the correct model"() {
@@ -30,7 +30,7 @@ class TekUserControllerSpec extends Specification {
             controller.create()
 
         then:"The model is correctly created"
-            model.tekUserInstance!= null
+            model.taskInstance!= null
     }
 
     void "Test the save action correctly persists an instance"() {
@@ -38,25 +38,25 @@ class TekUserControllerSpec extends Specification {
         when:"The save action is executed with an invalid instance"
             request.contentType = FORM_CONTENT_TYPE
             request.method = 'POST'
-            def tekUser = new TekUser()
-            tekUser.validate()
-            controller.save(tekUser)
+            def task = new Task()
+            task.validate()
+            controller.save(task)
 
         then:"The create view is rendered again with the correct model"
-            model.tekUserInstance!= null
+            model.taskInstance!= null
             view == 'create'
 
         when:"The save action is executed with a valid instance"
             response.reset()
             populateValidParams(params)
-            tekUser = new TekUser(params)
+            task = new Task(params)
 
-            controller.save(tekUser)
+            controller.save(task)
 
         then:"A redirect is issued to the show action"
-            response.redirectedUrl == '/tekUser/show/1'
+            response.redirectedUrl == '/task/show/1'
             controller.flash.message != null
-            TekUser.count() == 1
+            Task.count() == 1
     }
 
     void "Test that the show action returns the correct model"() {
@@ -68,11 +68,11 @@ class TekUserControllerSpec extends Specification {
 
         when:"A domain instance is passed to the show action"
             populateValidParams(params)
-            def tekUser = new TekUser(params)
-            controller.show(tekUser)
+            def task = new Task(params)
+            controller.show(task)
 
         then:"A model is populated containing the domain instance"
-            model.tekUserInstance == tekUser
+            model.taskInstance == task
     }
 
     void "Test that the edit action returns the correct model"() {
@@ -84,11 +84,11 @@ class TekUserControllerSpec extends Specification {
 
         when:"A domain instance is passed to the edit action"
             populateValidParams(params)
-            def tekUser = new TekUser(params)
-            controller.edit(tekUser)
+            def task = new Task(params)
+            controller.edit(task)
 
         then:"A model is populated containing the domain instance"
-            model.tekUserInstance == tekUser
+            model.taskInstance == task
     }
 
     void "Test the update action performs an update on a valid domain instance"() {
@@ -98,28 +98,28 @@ class TekUserControllerSpec extends Specification {
             controller.update(null)
 
         then:"A 404 error is returned"
-            response.redirectedUrl == '/tekUser/index'
+            response.redirectedUrl == '/task/index'
             flash.message != null
 
 
         when:"An invalid domain instance is passed to the update action"
             response.reset()
-            def tekUser = new TekUser()
-            tekUser.validate()
-            controller.update(tekUser)
+            def task = new Task()
+            task.validate()
+            controller.update(task)
 
         then:"The edit view is rendered again with the invalid instance"
             view == 'edit'
-            model.tekUserInstance == tekUser
+            model.taskInstance == task
 
         when:"A valid domain instance is passed to the update action"
             response.reset()
             populateValidParams(params)
-            tekUser = new TekUser(params).save(flush: true)
-            controller.update(tekUser)
+            task = new Task(params).save(flush: true)
+            controller.update(task)
 
         then:"A redirect is issues to the show action"
-            response.redirectedUrl == "/tekUser/show/$tekUser.id"
+            response.redirectedUrl == "/task/show/$task.id"
             flash.message != null
     }
 
@@ -130,23 +130,23 @@ class TekUserControllerSpec extends Specification {
             controller.delete(null)
 
         then:"A 404 is returned"
-            response.redirectedUrl == '/tekUser/index'
+            response.redirectedUrl == '/task/index'
             flash.message != null
 
         when:"A domain instance is created"
             response.reset()
             populateValidParams(params)
-            def tekUser = new TekUser(params).save(flush: true)
+            def task = new Task(params).save(flush: true)
 
         then:"It exists"
-            TekUser.count() == 1
+            Task.count() == 1
 
         when:"The domain instance is passed to the delete action"
-            controller.delete(tekUser)
+            controller.delete(task)
 
         then:"The instance is deleted"
-            TekUser.count() == 0
-            response.redirectedUrl == '/tekUser/index'
+            Task.count() == 0
+            response.redirectedUrl == '/task/index'
             flash.message != null
     }
 }

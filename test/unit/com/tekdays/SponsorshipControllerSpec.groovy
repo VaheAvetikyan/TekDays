@@ -5,9 +5,9 @@ package com.tekdays
 import grails.test.mixin.*
 import spock.lang.*
 
-@TestFor(TekUserController)
-@Mock(TekUser)
-class TekUserControllerSpec extends Specification {
+@TestFor(SponsorshipController)
+@Mock(Sponsorship)
+class SponsorshipControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
@@ -21,8 +21,8 @@ class TekUserControllerSpec extends Specification {
             controller.index()
 
         then:"The model is correct"
-            !model.tekUserInstanceList
-            model.tekUserInstanceCount == 0
+            !model.sponsorshipInstanceList
+            model.sponsorshipInstanceCount == 0
     }
 
     void "Test the create action returns the correct model"() {
@@ -30,7 +30,7 @@ class TekUserControllerSpec extends Specification {
             controller.create()
 
         then:"The model is correctly created"
-            model.tekUserInstance!= null
+            model.sponsorshipInstance!= null
     }
 
     void "Test the save action correctly persists an instance"() {
@@ -38,25 +38,25 @@ class TekUserControllerSpec extends Specification {
         when:"The save action is executed with an invalid instance"
             request.contentType = FORM_CONTENT_TYPE
             request.method = 'POST'
-            def tekUser = new TekUser()
-            tekUser.validate()
-            controller.save(tekUser)
+            def sponsorship = new Sponsorship()
+            sponsorship.validate()
+            controller.save(sponsorship)
 
         then:"The create view is rendered again with the correct model"
-            model.tekUserInstance!= null
+            model.sponsorshipInstance!= null
             view == 'create'
 
         when:"The save action is executed with a valid instance"
             response.reset()
             populateValidParams(params)
-            tekUser = new TekUser(params)
+            sponsorship = new Sponsorship(params)
 
-            controller.save(tekUser)
+            controller.save(sponsorship)
 
         then:"A redirect is issued to the show action"
-            response.redirectedUrl == '/tekUser/show/1'
+            response.redirectedUrl == '/sponsorship/show/1'
             controller.flash.message != null
-            TekUser.count() == 1
+            Sponsorship.count() == 1
     }
 
     void "Test that the show action returns the correct model"() {
@@ -68,11 +68,11 @@ class TekUserControllerSpec extends Specification {
 
         when:"A domain instance is passed to the show action"
             populateValidParams(params)
-            def tekUser = new TekUser(params)
-            controller.show(tekUser)
+            def sponsorship = new Sponsorship(params)
+            controller.show(sponsorship)
 
         then:"A model is populated containing the domain instance"
-            model.tekUserInstance == tekUser
+            model.sponsorshipInstance == sponsorship
     }
 
     void "Test that the edit action returns the correct model"() {
@@ -84,11 +84,11 @@ class TekUserControllerSpec extends Specification {
 
         when:"A domain instance is passed to the edit action"
             populateValidParams(params)
-            def tekUser = new TekUser(params)
-            controller.edit(tekUser)
+            def sponsorship = new Sponsorship(params)
+            controller.edit(sponsorship)
 
         then:"A model is populated containing the domain instance"
-            model.tekUserInstance == tekUser
+            model.sponsorshipInstance == sponsorship
     }
 
     void "Test the update action performs an update on a valid domain instance"() {
@@ -98,28 +98,28 @@ class TekUserControllerSpec extends Specification {
             controller.update(null)
 
         then:"A 404 error is returned"
-            response.redirectedUrl == '/tekUser/index'
+            response.redirectedUrl == '/sponsorship/index'
             flash.message != null
 
 
         when:"An invalid domain instance is passed to the update action"
             response.reset()
-            def tekUser = new TekUser()
-            tekUser.validate()
-            controller.update(tekUser)
+            def sponsorship = new Sponsorship()
+            sponsorship.validate()
+            controller.update(sponsorship)
 
         then:"The edit view is rendered again with the invalid instance"
             view == 'edit'
-            model.tekUserInstance == tekUser
+            model.sponsorshipInstance == sponsorship
 
         when:"A valid domain instance is passed to the update action"
             response.reset()
             populateValidParams(params)
-            tekUser = new TekUser(params).save(flush: true)
-            controller.update(tekUser)
+            sponsorship = new Sponsorship(params).save(flush: true)
+            controller.update(sponsorship)
 
         then:"A redirect is issues to the show action"
-            response.redirectedUrl == "/tekUser/show/$tekUser.id"
+            response.redirectedUrl == "/sponsorship/show/$sponsorship.id"
             flash.message != null
     }
 
@@ -130,23 +130,23 @@ class TekUserControllerSpec extends Specification {
             controller.delete(null)
 
         then:"A 404 is returned"
-            response.redirectedUrl == '/tekUser/index'
+            response.redirectedUrl == '/sponsorship/index'
             flash.message != null
 
         when:"A domain instance is created"
             response.reset()
             populateValidParams(params)
-            def tekUser = new TekUser(params).save(flush: true)
+            def sponsorship = new Sponsorship(params).save(flush: true)
 
         then:"It exists"
-            TekUser.count() == 1
+            Sponsorship.count() == 1
 
         when:"The domain instance is passed to the delete action"
-            controller.delete(tekUser)
+            controller.delete(sponsorship)
 
         then:"The instance is deleted"
-            TekUser.count() == 0
-            response.redirectedUrl == '/tekUser/index'
+            Sponsorship.count() == 0
+            response.redirectedUrl == '/sponsorship/index'
             flash.message != null
     }
 }
