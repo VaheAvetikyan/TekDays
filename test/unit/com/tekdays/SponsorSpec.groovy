@@ -15,10 +15,10 @@ class SponsorSpec extends Specification {
     def cleanup() {
     }
 
-    void "test sponsor"() {
+    void "test sponsor name"() {
         when:
-        def sponsor = new Sponsor(name: 'Bank', website: 'https://www.test.com')
+        def sponsor = new Sponsor(name: '', website: 'https://www.test.com')
         then:
-        sponsor.save()
+        !sponsor.validate(["name"])
     }
 }
