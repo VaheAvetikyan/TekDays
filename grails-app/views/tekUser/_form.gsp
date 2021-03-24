@@ -25,7 +25,7 @@
 		<g:message code="tekUser.password.label" default="Password" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="password" maxlength="15" required="" value="${tekUserInstance?.password}"/>
+	<g:passwordField name="password" maxlength="15" required="" value="${tekUserInstance?.password}"/>
 
 </div>
 

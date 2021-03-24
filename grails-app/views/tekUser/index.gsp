@@ -28,8 +28,6 @@
 					
 						<g:sortableColumn property="userName" title="${message(code: 'tekUser.userName.label', default: 'User Name')}" />
 					
-						<g:sortableColumn property="password" title="${message(code: 'tekUser.password.label', default: 'Password')}" />
-					
 						<g:sortableColumn property="email" title="${message(code: 'tekUser.email.label', default: 'Email')}" />
 					
 						<g:sortableColumn property="website" title="${message(code: 'tekUser.website.label', default: 'Website')}" />
@@ -45,8 +43,6 @@
 						<td><g:link action="show" id="${tekUserInstance.id}">${fieldValue(bean: tekUserInstance, field: "fullName")}</g:link></td>
 					
 						<td>${fieldValue(bean: tekUserInstance, field: "userName")}</td>
-					
-						<td>${fieldValue(bean: tekUserInstance, field: "password")}</td>
 					
 						<td>${fieldValue(bean: tekUserInstance, field: "email")}</td>
 					

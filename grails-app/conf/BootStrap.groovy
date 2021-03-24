@@ -96,10 +96,6 @@ class BootStrap {
                     website: 'http://www.sofs.com',
                     description: 'IT company ').save()
 
-            // TODO: change or examine the next 2 lines
-            g1.addToSponsors(s1)
-            g1.addToSponsors(s2)
-
             def sp1 = new Sponsorship(event: g1,
                     sponsor: s1,
                     contributionType: 'Other',

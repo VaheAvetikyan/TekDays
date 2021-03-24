@@ -32,6 +32,8 @@
 					
 						<g:sortableColumn property="dueDate" title="${message(code: 'task.dueDate.label', default: 'Due Date')}" />
 					
+						<g:sortableColumn property="completed" title="${message(code: 'task.completed.label', default: 'Completed')}" />
+					
 						<th><g:message code="task.event.label" default="Event" /></th>
 					
 					</tr>
@@ -47,6 +49,8 @@
 						<td>${fieldValue(bean: taskInstance, field: "assignedTo")}</td>
 					
 						<td><g:formatDate date="${taskInstance.dueDate}" /></td>
+					
+						<td><g:formatBoolean boolean="${taskInstance.completed}" /></td>
 					
 						<td>${fieldValue(bean: taskInstance, field: "event")}</td>
 					

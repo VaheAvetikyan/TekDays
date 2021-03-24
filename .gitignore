@@ -119,7 +119,7 @@ ivy*
 eclipse
 remote/DB/
 .slcache/
-
+bin/
 
 out/
 lib/build/

@@ -12,7 +12,6 @@ class TekEvent {
 
     static hasMany = [volunteers  : TekUser,
                       respondents : String,
-                      sponsors    : Sponsor,
                       sponsorships: Sponsorship,
                       tasks       : Task,
                       messages    : TekMessage]
@@ -30,7 +29,6 @@ class TekEvent {
         venue()
         startDate()
         endDate()
-        sponsors nullable: true
         sponsorships nullable: true
         volunteers nullable: true
         respondents blank: true

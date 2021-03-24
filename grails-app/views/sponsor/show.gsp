@@ -17,20 +17,11 @@
 			</ul>
 		</div>
 		<div id="show-sponsor" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
+			<h1>${sponsorInstance.name}</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<ol class="property-list sponsor">
-			
-				<g:if test="${sponsorInstance?.name}">
-				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="sponsor.name.label" default="Name" /></span>
-					
-						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${sponsorInstance}" field="name"/></span>
-					
-				</li>
-				</g:if>
 			
 				<g:if test="${sponsorInstance?.website}">
 				<li class="fieldcontain">
@@ -62,7 +53,9 @@
 					<span id="sponsorships-label" class="property-label"><g:message code="sponsor.sponsorships.label" default="Sponsorships" /></span>
 					
 						<g:each in="${sponsorInstance.sponsorships}" var="s">
-						<span class="property-value" aria-labelledby="sponsorships-label"><g:link controller="sponsorship" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="sponsorships-label">
+							<g:link controller="sponsorship" action="show" id="${s.id}">${s?.event?.encodeAsHTML()}</g:link>
+						</span>
 						</g:each>
 					
 				</li>
