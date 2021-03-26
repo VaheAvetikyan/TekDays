@@ -29,7 +29,7 @@ class BootStrap {
                         startups and founders at all stages of startup development.''').save()
 
             def summit = new TekEvent(name: 'Sevan StartUp Summit',
-                    city: 'Sevan, Armenia',
+                    city: 'Sevan',
                     organizer: TekUser.findByFullName('Startup Armenia'),
                     venue: 'Drakhtik',
                     startDate: new Date('07/26/2021'),
@@ -47,7 +47,7 @@ class BootStrap {
             }
 
             def marathon = new TekEvent(name: 'Yerevan Marathon',
-                    city: 'Yerevan, Armenia',
+                    city: 'Yerevan',
                     organizer: TekUser.findByFullName('Arm Marathon Foundation'),
                     venue: 'Yerevan',
                     startDate: new Date('10/2/2019'),

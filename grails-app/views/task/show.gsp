@@ -8,15 +8,17 @@
 </head>
 
 <body>
-<a href="#show-task" class="skip" tabindex="-1"><g:message code="default.link.skip.label"
-                                                           default="Skip to content&hellip;"/></a>
+<a href="#show-task" class="skip" tabindex="-1">
+    <g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 
 <div class="nav" role="navigation">
     <ul>
-        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-        <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]"/></g:link></li>
-        <li><g:link class="create" action="create"><g:message code="default.new.label"
-                                                              args="[entityName]"/></g:link></li>
+        <li><a class="home" href="${createLink(uri: '/')}">
+            <g:message code="default.home.label"/></a></li>
+        <li><g:link class="list" action="index">
+            <g:message code="default.list.label" args="[entityName]"/></g:link></li>
+        <li><g:link class="create" action="create">
+            <g:message code="default.new.label" args="[entityName]"/></g:link></li>
     </ul>
 </div>
 
@@ -29,19 +31,19 @@
 
         <g:if test="${taskInstance?.notes}">
             <li class="fieldcontain">
-                <span id="notes-label" class="property-label"><g:message code="task.notes.label"
-                                                                         default="Notes"/></span>
+                <span id="notes-label" class="property-label">
+                    <g:message code="task.notes.label" default="Notes"/></span>
 
-                <span class="property-value" aria-labelledby="notes-label"><g:fieldValue bean="${taskInstance}"
-                                                                                         field="notes"/></span>
+                <span class="property-value" aria-labelledby="notes-label">
+                    <g:fieldValue bean="${taskInstance}" field="notes"/></span>
 
             </li>
         </g:if>
 
         <g:if test="${taskInstance?.assignedTo}">
             <li class="fieldcontain">
-                <span id="assignedTo-label" class="property-label"><g:message code="task.assignedTo.label"
-                                                                              default="Assigned To"/></span>
+                <span id="assignedTo-label" class="property-label">
+                    <g:message code="task.assignedTo.label" default="Assigned To"/></span>
 
                 <span class="property-value" aria-labelledby="assignedTo-label">
                     <g:link controller="tekUser" action="show"
@@ -52,30 +54,30 @@
 
         <g:if test="${taskInstance?.dueDate}">
             <li class="fieldcontain">
-                <span id="dueDate-label" class="property-label"><g:message code="task.dueDate.label"
-                                                                           default="Due Date"/></span>
+                <span id="dueDate-label" class="property-label">
+                    <g:message code="task.dueDate.label" default="Due Date"/></span>
 
-                <span class="property-value" aria-labelledby="dueDate-label"><g:formatDate
-                        date="${taskInstance?.dueDate}" format="MMMM dd, yyyy"/></span>
+                <span class="property-value" aria-labelledby="dueDate-label">
+                    <g:formatDate date="${taskInstance?.dueDate}" format="MMMM dd, yyyy"/></span>
 
             </li>
         </g:if>
 
         <g:if test="${taskInstance?.completed}">
             <li class="fieldcontain">
-                <span id="completed-label" class="property-label"><g:message code="task.completed.label"
-                                                                             default="Completed"/></span>
+                <span id="completed-label" class="property-label">
+                    <g:message code="task.completed.label" default="Completed"/></span>
 
-                <span class="property-value" aria-labelledby="completed-label"><g:formatBoolean
-                        boolean="${taskInstance?.completed}" true="Yes" false="No"/></span>
+                <span class="property-value" aria-labelledby="completed-label">
+                    <g:formatBoolean boolean="${taskInstance?.completed}" true="Yes" false="No"/></span>
 
             </li>
         </g:if>
 
         <g:if test="${taskInstance?.event}">
             <li class="fieldcontain">
-                <span id="event-label" class="property-label"><g:message code="task.event.label"
-                                                                         default="Event"/></span>
+                <span id="event-label" class="property-label">
+                    <g:message code="task.event.label" default="Event"/></span>
 
                 <span class="property-value" aria-labelledby="event-label">
                     <g:link controller="tekEvent" action="show"
@@ -87,8 +89,8 @@
     </ol>
     <g:form url="[resource: taskInstance, action: 'delete']" method="DELETE">
         <fieldset class="buttons">
-            <g:link class="edit" action="edit" resource="${taskInstance}"><g:message code="default.button.edit.label"
-                                                                                     default="Edit"/></g:link>
+            <g:link class="edit" action="edit" resource="${taskInstance}">
+                <g:message code="default.button.edit.label" default="Edit"/></g:link>
             <g:actionSubmit class="delete" action="delete"
                             value="${message(code: 'default.button.delete.label', default: 'Delete')}"
                             onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>

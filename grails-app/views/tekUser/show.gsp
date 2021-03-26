@@ -1,71 +1,88 @@
-
 <%@ page import="com.tekdays.TekUser" %>
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'tekUser.label', default: 'TekUser')}" />
-		<title><g:message code="default.show.label" args="[entityName]" /></title>
-	</head>
-	<body>
-		<a href="#show-tekUser" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
-		</div>
-		<div id="show-tekUser" class="content scaffold-show" role="main">
-			<h1>${tekUserInstance.fullName}</h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
-			<ol class="property-list tekUser">
+<head>
+    <meta name="layout" content="main">
+    <g:set var="entityName" value="${message(code: 'tekUser.label', default: 'TekUser')}"/>
+    <title><g:message code="default.show.label" args="[entityName]"/></title>
+</head>
 
-				<g:if test="${tekUserInstance?.userName}">
-				<li class="fieldcontain">
-					<span id="userName-label" class="property-label"><g:message code="tekUser.userName.label" default="User Name" /></span>
+<body>
+<a href="#show-tekUser" class="skip" tabindex="-1">
+    <g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 
-						<span class="property-value" aria-labelledby="userName-label"><g:fieldValue bean="${tekUserInstance}" field="userName"/></span>
+<div class="nav" role="navigation">
+    <ul>
+        <li><a class="home" href="${createLink(uri: '/')}">
+            <g:message code="default.home.label"/></a></li>
+        <li><g:link class="list" action="index">
+            <g:message code="default.list.label" args="[entityName]"/></g:link></li>
+        <li><g:link class="create" action="create">
+            <g:message code="default.new.label" args="[entityName]"/></g:link></li>
+    </ul>
+</div>
 
-				</li>
-				</g:if>
+<div id="show-tekUser" class="content scaffold-show" role="main">
+    <h1>${tekUserInstance.fullName}</h1>
+    <g:if test="${flash.message}">
+        <div class="message" role="status">${flash.message}</div>
+    </g:if>
+    <ol class="property-list tekUser">
 
-				<g:if test="${tekUserInstance?.email}">
-				<li class="fieldcontain">
-					<span id="email-label" class="property-label"><g:message code="tekUser.email.label" default="Email" /></span>
+        <g:if test="${tekUserInstance?.userName}">
+            <li class="fieldcontain">
+                <span id="userName-label" class="property-label">
+                    <g:message code="tekUser.userName.label" default="User Name"/></span>
 
-						<span class="property-value" aria-labelledby="email-label"><g:fieldValue bean="${tekUserInstance}" field="email"/></span>
+                <span class="property-value" aria-labelledby="userName-label">
+                    <g:fieldValue bean="${tekUserInstance}" field="userName"/></span>
 
-				</li>
-				</g:if>
+            </li>
+        </g:if>
 
-				<g:if test="${tekUserInstance?.website}">
-				<li class="fieldcontain">
-					<span id="website-label" class="property-label"><g:message code="tekUser.website.label" default="Website" /></span>
+        <g:if test="${tekUserInstance?.email}">
+            <li class="fieldcontain">
+                <span id="email-label" class="property-label">
+                    <g:message code="tekUser.email.label" default="Email"/></span>
 
-						<span class="property-value" aria-labelledby="website-label"><g:fieldValue bean="${tekUserInstance}" field="website"/></span>
+                <span class="property-value" aria-labelledby="email-label">
+                    <g:fieldValue bean="${tekUserInstance}" field="email"/></span>
 
-				</li>
-				</g:if>
+            </li>
+        </g:if>
 
-				<g:if test="${tekUserInstance?.bio}">
-				<li class="fieldcontain">
-					<span id="bio-label" class="property-label"><g:message code="tekUser.bio.label" default="Bio" /></span>
+        <g:if test="${tekUserInstance?.website}">
+            <li class="fieldcontain">
+                <span id="website-label" class="property-label">
+                    <g:message code="tekUser.website.label" default="Website"/></span>
 
-						<span class="property-value" aria-labelledby="bio-label"><g:fieldValue bean="${tekUserInstance}" field="bio"/></span>
+                <span class="property-value" aria-labelledby="website-label">
+                    <g:fieldValue bean="${tekUserInstance}" field="website"/></span>
 
-				</li>
-				</g:if>
+            </li>
+        </g:if>
 
-			</ol>
-			<g:form url="[resource:tekUserInstance, action:'delete']" method="DELETE">
-				<fieldset class="buttons">
-					<g:link class="edit" action="edit" resource="${tekUserInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
-			</g:form>
-		</div>
-	</body>
+        <g:if test="${tekUserInstance?.bio}">
+            <li class="fieldcontain">
+                <span id="bio-label" class="property-label">
+                    <g:message code="tekUser.bio.label" default="Bio"/></span>
+
+                <span class="property-value" aria-labelledby="bio-label">
+                    <g:fieldValue bean="${tekUserInstance}" field="bio"/></span>
+
+            </li>
+        </g:if>
+
+    </ol>
+    <g:form url="[resource: tekUserInstance, action: 'delete']" method="DELETE">
+        <fieldset class="buttons">
+            <g:link class="edit" action="edit" resource="${tekUserInstance}">
+                <g:message code="default.button.edit.label" default="Edit"/></g:link>
+            <g:actionSubmit class="delete" action="delete"
+                            value="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                            onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
+        </fieldset>
+    </g:form>
+</div>
+</body>
 </html>

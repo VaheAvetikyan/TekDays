@@ -112,7 +112,7 @@
 
     <ul class="one-to-many">
         <g:each in="${tekEventInstance?.tasks ?}" var="t">
-            <li><g:link controller="task" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></li>
+            <li><g:link controller="task" action="show" id="${t.id}">${t?.title?.encodeAsHTML()}</g:link></li>
         </g:each>
         <li class="add">
             <g:link controller="task" action="create"
@@ -130,7 +130,7 @@
 
     <ul class="one-to-many">
         <g:each in="${tekEventInstance?.messages ?}" var="m">
-            <li><g:link controller="tekMessage" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
+            <li><g:link controller="tekMessage" action="show" id="${m.id}">${m?.subject?.encodeAsHTML()}</g:link></li>
         </g:each>
         <li class="add">
             <g:link controller="tekMessage" action="create" params="['event.id': tekEventInstance?.id]">

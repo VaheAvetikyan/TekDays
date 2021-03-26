@@ -52,15 +52,6 @@
             </li>
         </g:if>
 
-    %{--				<g:if test="${tekEventInstance?.venue}">--}%
-    %{--				<li class="fieldcontain">--}%
-    %{--					<span id="venue-label" class="property-label"><g:message code="tekEvent.venue.label" default="Venue" /></span>--}%
-    %{--					--}%
-    %{--						<span class="property-value" aria-labelledby="venue-label"><g:fieldValue bean="${tekEventInstance}" field="venue"/></span>--}%
-    %{--					--}%
-    %{--				</li>--}%
-    %{--				</g:if>--}%
-
         <g:if test="${tekEventInstance?.startDate}">
             <li class="fieldcontain">
                 <span id="startDate-label" class="property-label">
@@ -103,8 +94,8 @@
 
         <g:if test="${tekEventInstance?.volunteers}">
             <li class="fieldcontain">
-                <span id="volunteers-label" class="property-label"><g:message code="tekEvent.volunteers.label"
-                                                                              default="Volunteers"/></span>
+                <span id="volunteers-label" class="property-label">
+                    <g:message code="tekEvent.volunteers.label" default="Volunteers"/></span>
 
                 <g:each in="${tekEventInstance.volunteers}" var="v">
                     <span class="property-value" aria-labelledby="volunteers-label">

@@ -6,8 +6,7 @@ class Sponsor {
     String description
     byte[] logo
 
-    static hasMany = [events      : TekEvent,
-                      sponsorships: Sponsorship]
+    static hasMany = [sponsorships: Sponsorship]
     static belongsTo = TekEvent
 
     String toString() {

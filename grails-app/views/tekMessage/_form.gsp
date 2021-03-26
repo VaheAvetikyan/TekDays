@@ -38,6 +38,4 @@
 
 </div>
 
-<div>
-    <g:hiddenField name="event.id" value="${tekMessageInstance?.event?.id}"/>
-</div>
+<g:hiddenField name="event.id" value="${tekMessageInstance?.event?.id}"/>

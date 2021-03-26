@@ -1,7 +1,5 @@
 <%@ page import="com.tekdays.Task" %>
 
-
-
 <div class="fieldcontain ${hasErrors(bean: taskInstance, field: 'title', 'error')} required">
     <label for="title">
         <g:message code="task.title.label" default="Title"/>
@@ -37,7 +35,6 @@
     </label>
     <g:datePicker name="dueDate" precision="day" value="${taskInstance?.dueDate}" default="none"
                   noSelection="['': '']" years="${2020..2030}"/>
-
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: taskInstance, field: 'completed', 'error')} ">
@@ -46,16 +43,17 @@
 
     </label>
     <g:checkBox name="completed" value="${taskInstance?.completed}"/>
-
 </div>
-
-<div class="fieldcontain ${hasErrors(bean: taskInstance, field: 'event', 'error')} required">
-    <label for="event">
-        <g:message code="task.event.label" default="Event"/>
-        <span class="required-indicator">*</span>
-    </label>
-    <g:select id="event" name="event.id" from="${com.tekdays.TekEvent.list()}" optionKey="id" required=""
-              value="${taskInstance?.event?.id}" class="many-to-one"/>
-
-</div>
-
+<g:if test="${taskInstance.event == null}">
+    <div class="fieldcontain ${hasErrors(bean: taskInstance, field: 'event', 'error')} required">
+        <label for="event">
+            <g:message code="task.event.label" default="Event"/>
+            <span class="required-indicator">*</span>
+        </label>
+        <g:select id="event" name="event.id" from="${com.tekdays.TekEvent.list()}" optionKey="id" required=""
+                  value="${taskInstance?.event?.id}" class="many-to-one"/>
+    </div>
+</g:if>
+<g:else>
+    <g:hiddenField name="event.id" value="${taskInstance?.event?.id}" class="many-to-one"/>
+</g:else>
