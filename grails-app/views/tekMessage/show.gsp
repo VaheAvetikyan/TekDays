@@ -17,8 +17,6 @@
             <g:message code="default.home.label"/></a></li>
         <li><g:link class="list" action="index">
             <g:message code="default.list.label" args="[entityName]"/></g:link></li>
-        <li><g:link class="create" action="create">
-            <g:message code="default.new.label" args="[entityName]"/></g:link></li>
     </ul>
 </div>
 
@@ -58,7 +56,7 @@
 
                 <span class="property-value" aria-labelledby="parent-label">
                     <g:link controller="tekMessage" action="show"
-                            id="${tekMessageInstance?.parent?.id}">${tekMessageInstance?.parent?.encodeAsHTML()}</g:link></span>
+                            id="${tekMessageInstance?.parent?.id}">${tekMessageInstance?.parent?.subject?.encodeAsHTML()}</g:link></span>
 
             </li>
         </g:if>
