@@ -29,6 +29,8 @@
             </td>
             <td class="value">
                 <input type="password" id="password" name="password" value="">
+                <input type="hidden" name="cName" value="${cName}">
+                <input type="hidden" name="aName" value="${aName}">
             </td>
         </tr>
         <tr>
@@ -39,8 +41,6 @@
             </td>
         </tr>
     </table>
-    <input type="hidden" name="cName" value="${cName}">
-    <input type="hidden" name="aName" value="${aName}">
 </g:form>
 
 </body>
