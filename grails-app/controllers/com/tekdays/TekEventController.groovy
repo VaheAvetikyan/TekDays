@@ -25,6 +25,7 @@ class TekEventController {
     }
 
     def create() {
+
         respond new TekEvent(params)
     }
 
@@ -57,6 +58,8 @@ class TekEventController {
     }
 
     def edit(TekEvent tekEventInstance) {
+        if (TekUser.get(session.user?.id) != tekEventInstance?.organizer)
+            redirect controller: 'tekEvent', action: 'show', id: tekEventInstance?.id
         respond tekEventInstance
     }
 

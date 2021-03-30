@@ -1,11 +1,15 @@
 package com.tekdays
 
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class TekUserController {
+
+    public static final Logger LOGGER = LoggerFactory.getLogger(TekUserController.class)
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -30,6 +34,8 @@ class TekUserController {
     }
 
     def validate() {
+        LOGGER.info("Login. username: {}, password: {}", params.username, params.password)
+
         def user = TekUser.findByUserName(params.username)
         if (user && user.password == params.password) {
             session.user = user
