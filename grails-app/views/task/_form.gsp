@@ -44,7 +44,7 @@
     </label>
     <g:checkBox name="completed" value="${taskInstance?.completed}"/>
 </div>
-<g:if test="${taskInstance.event == null}">
+<g:if test="${taskInstance?.event == null}">
     <div class="fieldcontain ${hasErrors(bean: taskInstance, field: 'event', 'error')} required">
         <label for="event">
             <g:message code="task.event.label" default="Event"/>

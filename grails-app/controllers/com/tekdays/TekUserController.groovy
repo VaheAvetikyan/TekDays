@@ -9,7 +9,8 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class TekUserController {
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(TekUserController.class)
+    // Logger instance
+    private static final Logger LOGGER = LoggerFactory.getLogger(TekUserController.class)
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -24,24 +25,33 @@ class TekUserController {
 
     def login() {
         if (params.cName) {
-            return [cName: params.cName, aName: params.aName]
+            return [cName: params.cName, aName: params.aName, id: params.id]
         }
     }
 
     def logout() {
         session.user = null
-        redirect(uri:'/')
+        redirect(uri: '/')
     }
 
     def validate() {
-        LOGGER.info("Login. username: {}, password: {}", params.username, params.password)
-
         def user = TekUser.findByUserName(params.username)
         if (user && user.password == params.password) {
+            // Activate user in session
             session.user = user
 
+            // Show login info in log
+            LOGGER.info("Successfully logged in user: ${user.fullName}")
+
             if (params.cName) {
-                redirect controller: params.cName, action: params.aName
+
+                // Redirect to 'delete' action is forbidden, so we need to redirect to 'show' action
+                if (params.aName == "delete") {
+                    redirect controller: params.cName, action: 'show', id: params.id
+                    // Need to return from method after the redirect above
+                    return
+                }
+                redirect controller: params.cName, action: params.aName, id: params.id
             } else {
                 redirect controller: 'tekEvent', action: 'index'
             }

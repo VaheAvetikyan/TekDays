@@ -54,9 +54,7 @@ class TaskController {
     }
 
     def edit(Task taskInstance) {
-//        respond taskInstance
-        def title = taskInstance?.title
-        render view: 'edit', model: [title: title]
+        respond taskInstance
     }
 
     @Transactional
