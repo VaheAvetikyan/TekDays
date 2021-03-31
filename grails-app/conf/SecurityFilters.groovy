@@ -9,7 +9,8 @@ class SecurityFilters {
                 if (!session.user && !allowedActions.contains(actionName)) {
                     redirect(controller: 'tekUser', action: 'login',
                             params: ['cName': controllerName,
-                                     'aName': actionName])
+                                     'aName': actionName,
+                                     'id'   : params.id])  // Id parameter added for 'edit' or 'delete' actions
                     return false
                 }
             }

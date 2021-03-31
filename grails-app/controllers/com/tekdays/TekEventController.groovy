@@ -43,7 +43,7 @@ class TekEventController {
         tekEventInstance.save flush: true
 
         // Logger for event creation
-        LOGGER.info("New event created with id: {}", tekEventInstance?.id)
+        LOGGER.info("New event created with id: ${tekEventInstance?.id}")
 
         taskService.addDefaultTasks(tekEventInstance)
 

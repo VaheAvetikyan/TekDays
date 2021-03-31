@@ -31,6 +31,7 @@
                 <input type="password" id="password" name="password" value="">
                 <input type="hidden" name="cName" value="${cName}">
                 <input type="hidden" name="aName" value="${aName}">
+                <input type="hidden" name="id" value="${id}">
             </td>
         </tr>
         <tr>
