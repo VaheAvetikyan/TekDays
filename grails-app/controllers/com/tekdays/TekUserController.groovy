@@ -10,7 +10,7 @@ import grails.transaction.Transactional
 class TekUserController {
 
     // Logger instance
-    private static final Logger LOGGER = LoggerFactory.getLogger(TaskController.class)
+    private static final Logger LOGGER = LoggerFactory.getLogger(TekUserController.class)
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 

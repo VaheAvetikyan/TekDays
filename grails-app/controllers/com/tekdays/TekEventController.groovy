@@ -10,7 +10,7 @@ import grails.transaction.Transactional
 class TekEventController {
 
     // Logger instance
-    private static final Logger LOGGER = LoggerFactory.getLogger(TaskController.class)
+    private static final Logger LOGGER = LoggerFactory.getLogger(TekEventController.class)
 
     def taskService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -43,7 +43,7 @@ class TekEventController {
         tekEventInstance.save flush: true
 
         // Logger for event creation
-        LOGGER.info("New event created with id: ${tekEventInstance?.id}")
+        LOGGER.info("New event created with name: ${tekEventInstance?.name}")
 
         taskService.addDefaultTasks(tekEventInstance)
 
@@ -57,6 +57,10 @@ class TekEventController {
     }
 
     def edit(TekEvent tekEventInstance) {
+        // Only organizer of the event can edit the event
+        if (!validateOrganizer(tekEventInstance)) {
+            redirect controller: 'tekEvent', action: 'show', id: tekEventInstance?.id
+        }
         respond tekEventInstance
     }
 
@@ -91,6 +95,11 @@ class TekEventController {
             return
         }
 
+        // Only organizer of the event can delete the event
+        if (!validateOrganizer(tekEventInstance)) {
+            redirect controller: 'tekEvent', action: 'show', id: tekEventInstance?.id
+        }
+
         tekEventInstance.delete flush: true
 
         request.withFormat {
@@ -100,6 +109,14 @@ class TekEventController {
             }
             '*' { render status: NO_CONTENT }
         }
+    }
+
+    // Check if current user is the organizer of the event
+    private boolean validateOrganizer(TekEvent tekEventInstance) {
+        if (TekUser.get(session.user?.id) == tekEventInstance?.organizer) {
+            return true
+        }
+        return false
     }
 
     protected void notFound() {
