@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory
 class SecurityFilters {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(SecurityFilters.class)
-git
+
     def filters = {
         doLogin(controller: '*', action: '*') {
             before = {
