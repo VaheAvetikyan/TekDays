@@ -35,7 +35,10 @@ class TekEvent {
         tasks nullable: true
         messages nullable: true
     }
-    
-    // TODO: on delete cascade, because 'tasks' and 'sponsorships' belong to tekEvent
-    //  (one-to-many relationship), so FOREIGN_KEY constraint prevents from deleting
+
+    static mapping = {
+        sponsorships cascade: 'all-delete-orphan'
+        tasks cascade: 'all-delete-orphan'
+        messages cascade: 'all-delete-orphan'
+    }
 }
