@@ -64,12 +64,15 @@ body {
 	height: 100%;
 }
 
-a:link, a:visited, a:hover {
-	color: #48802c;
+a:link, a:visited {
+	text-decoration: none;
+	color: #53a127;
 }
 
 a:hover, a:active {
-	outline: none; /* prevents outline in webkit on active links but retains it for tab focus */
+    text-decoration: underline;
+    color: dodgerblue;
+    outline: none; /* prevents outline in webkit on active links but retains it for tab focus */
 }
 
 h1 {

@@ -3,6 +3,7 @@ import org.slf4j.LoggerFactory
 
 class SecurityFilters {
 
+    // TODO: this logger is not showing
     public static final Logger LOGGER = LoggerFactory.getLogger(SecurityFilters.class)
 
     def filters = {
@@ -29,6 +30,7 @@ class SecurityFilters {
             }
         }
 
+        // TODO: this filter is not working
         messageCheck(controller: 'tekMessage', action: 'reply') {
             before = {
                 println("Showing MessagingFilters. controllerName: ${controllerName}, actionName: ${actionName}")
