@@ -20,4 +20,8 @@ class Sponsor {
         logo nullable: true, maxSize: 1000000
         sponsorships nullable: true
     }
+
+    static mapping = {
+        sponsorships cascade: 'all-delete-orphan'
+    }
 }

@@ -1,5 +1,15 @@
 <div id="show-tekMessage" class="content scaffold-show" role="main">
+    <br>
+
+    <h3>Message Details</h3>
     <ol class="property-list tekMessage">
+        <g:if test="${tekMessageInstance?.parent}">
+            <li class="fieldcontain">
+                <span class="property-label">In reply to</span>
+                <span class="property-value" aria-labelledby="subject-label">
+                    <g:fieldValue bean="${tekMessageInstance?.parent}" field="author"/></span>
+            </li>
+        </g:if>
         <g:if test="${tekMessageInstance?.subject}">
             <li class="fieldcontain">
                 <span id="subject-label" class="property-label">

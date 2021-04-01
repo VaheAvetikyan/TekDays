@@ -35,4 +35,10 @@ class TekEvent {
         tasks nullable: true
         messages nullable: true
     }
+
+    static mapping = {
+        sponsorships cascade: 'all-delete-orphan'
+        tasks cascade: 'all-delete-orphan'
+        messages cascade: 'all-delete-orphan'
+    }
 }

@@ -1,6 +1,7 @@
 package com.tekdays
 
-
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -8,12 +9,15 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class TekEventController {
 
+    // Logger instance
+    private static final Logger LOGGER = LoggerFactory.getLogger(TekEventController.class)
+
     def taskService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond TekEvent.list(params), model:[tekEventInstanceCount: TekEvent.count()]
+        respond TekEvent.list(params), model: [tekEventInstanceCount: TekEvent.count()]
     }
 
     def show(TekEvent tekEventInstance) {
@@ -32,11 +36,15 @@ class TekEventController {
         }
 
         if (tekEventInstance.hasErrors()) {
-            respond tekEventInstance.errors, view:'create'
+            respond tekEventInstance.errors, view: 'create'
             return
         }
 
-        tekEventInstance.save flush:true
+        tekEventInstance.save flush: true
+
+        // Logger for event creation
+        LOGGER.info("New event created with name: ${tekEventInstance?.name}")
+
         taskService.addDefaultTasks(tekEventInstance)
 
         request.withFormat {
@@ -49,6 +57,10 @@ class TekEventController {
     }
 
     def edit(TekEvent tekEventInstance) {
+        // Only organizer of the event can edit the event
+        if (!validateOrganizer(tekEventInstance)) {
+            redirect controller: 'tekEvent', action: 'show', id: tekEventInstance?.id
+        }
         respond tekEventInstance
     }
 
@@ -60,18 +72,18 @@ class TekEventController {
         }
 
         if (tekEventInstance.hasErrors()) {
-            respond tekEventInstance.errors, view:'edit'
+            respond tekEventInstance.errors, view: 'edit'
             return
         }
 
-        tekEventInstance.save flush:true
+        tekEventInstance.save flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'TekEvent.label', default: 'TekEvent'), tekEventInstance.id])
                 redirect tekEventInstance
             }
-            '*'{ respond tekEventInstance, [status: OK] }
+            '*' { respond tekEventInstance, [status: OK] }
         }
     }
 
@@ -83,15 +95,28 @@ class TekEventController {
             return
         }
 
-        tekEventInstance.delete flush:true
+        // Only organizer of the event can delete the event
+        if (!validateOrganizer(tekEventInstance)) {
+            redirect controller: 'tekEvent', action: 'show', id: tekEventInstance?.id
+        }
+
+        tekEventInstance.delete flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'TekEvent.label', default: 'TekEvent'), tekEventInstance.id])
-                redirect action:"index", method:"GET"
+                redirect action: "index", method: "GET"
             }
-            '*'{ render status: NO_CONTENT }
+            '*' { render status: NO_CONTENT }
         }
+    }
+
+    // Check if current user is the organizer of the event
+    private boolean validateOrganizer(TekEvent tekEventInstance) {
+        if (TekUser.get(session.user?.id) == tekEventInstance?.organizer) {
+            return true
+        }
+        return false
     }
 
     protected void notFound() {
@@ -100,7 +125,7 @@ class TekEventController {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'tekEvent.label', default: 'TekEvent'), params.id])
                 redirect action: "index", method: "GET"
             }
-            '*'{ render status: NOT_FOUND }
+            '*' { render status: NOT_FOUND }
         }
     }
 }
