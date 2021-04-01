@@ -92,8 +92,8 @@ class BootStrap {
                     website: 'http://ociweb.com',
                     description: 'An OO Software Engineering Company').save()
 
-            def s3 = new Sponsor(name: 'SOFS',
-                    website: 'http://www.sofs.com',
+            def s3 = new Sponsor(name: 'Spirit Of Soft LLC',
+                    website: 'http://www.spiritofsoft.com',
                     description: 'IT company ').save()
 
             def sp1 = new Sponsorship(event: g1,
