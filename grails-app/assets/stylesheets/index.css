@@ -56,12 +56,14 @@
 }
 
 .page-body {
+    text-align: center;
     background-color: #eef;
     border: .25em solid #eff;
     margin: 1em 1em 1em 1em;
+    width: 40%;
     padding: 1em;
     border-radius: 0.7em;
-    display: inline-block;
+    display: block;
     float: left;
 }
 
@@ -106,10 +108,12 @@ p {
 @media screen and (max-width: 480px) {
     .homeCell {
         display: inline;
+        width: auto;
     }
 
     .page-body {
         margin: 0 1em 1em;
+        width: auto;
     }
 
     .page-body h1 {
