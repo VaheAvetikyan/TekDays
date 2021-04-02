@@ -6,17 +6,20 @@
 </head>
 
 <body>
+<g:if test="${!session.user}">
+    <div class="page-body">
+        <h1>Welcome to TekDays.com</h1>
 
-<div class="page-body">
-    <h1>Welcome to TekDays.com</h1>
+        <p>TekDays.com is a site dedicated to assisting individuals and
+        communities to organize technology conferences. To bring great
+        minds with common interests and passions together for the good
+        of greater geekdom!</p>
 
-    <p>TekDays.com is a site dedicated to assisting individuals and
-    communities to organize technology conferences. To bring great
-    minds with common interests and passions together for the good
-    of greater geekdom!</p>
-</div>
-
-<div class="statusBlocks">
+    </div>
+</g:if>
+<g:organizerEvents/>
+<g:volunteerEvents/>
+<div class="homeCell">
     <h1>Find a Tek Event</h1>
 
     <p>See if there's a technical event in the works that strikes your
@@ -28,7 +31,7 @@
     </span>
 </div>
 
-<div class="statusBlocks">
+<div class="homeCell">
     <h1>Organize a Tek Event</h1>
 
     <p>If you don't see anything that suits your interest and location,
@@ -40,7 +43,7 @@
     </span>
 </div>
 
-<div class="statusBlocks">
+<div class="homeCell">
     <h1>Sponsor a Tek Event</h1>
 
     <p>If you are part of a business or organization that is involved in

@@ -4,6 +4,24 @@ class BootStrap {
 
     def init = { servletContext ->
         if (!TekEvent.get(1)) {
+            new TekUser(fullName: 'John Doe',
+                    userName: 'jdoe',
+                    password: 't0ps3cr3t',
+                    email: 'jdoe@johnsgroovyshop.com',
+                    website: 'https://blog.johnsgroovyshop.com',
+                    bio: '''John has been programming for over 40 years. He has
+                            worked with every programming language known to man
+                            and has settled on Groovy. In his spare time, John
+                            dabbles in astro physics and plays
+                            shuffleboard.''').save()
+            new TekUser(fullName: 'John Deere',
+                    userName: 'tractorman',
+                    password: 't0ps3cr3t',
+                    email: 'john.deere@porkproducers.org',
+                    website: 'https://www.perl.porkproducers.org',
+                    bio: '''John is a top notch Perl programmer and a pretty
+                            good hand around the farm. If he can't program it he
+                            can plow it!''').save()
             new TekUser(fullName: 'Vahe Avetikyan',
                     userName: 'VaheA',
                     password: 't0ps3cr3t',
