@@ -22,4 +22,42 @@ class TekEventSpec extends Specification {
         then: "the toString method will combine them."
         tekEvent.toString() == 'Groovy One, San Francisco'
     }
+
+    void "test name"() {
+        when: "event has a name"
+        def event = new TekEvent(name: "Groovy One")
+        then: "event name is valid, but event will not save as it is not full"
+        event.validate(['name'])
+        !event.save()
+    }
+
+    void "test date"() {
+        when: "date field is not Date"
+        def event = new TekEvent(name: "Groovy One",
+                city: "San Francisco",
+                organizer: [fullname: "John Doe"] as TekUser,
+                startDate: "date",
+                endDate: "date")
+        then: "date validation should fail"
+        !event.validate(['startDate', 'endDate'])
+    }
+
+    void "test endDate"() {
+        when: "a tekEvent has an end date before start date"
+        def event = new TekEvent(name: "Groovy One",
+                city: "San Francisco",
+                organizer: [fullname: "John Doe"] as TekUser,
+                startDate: new Date(),
+                endDate: new Date())
+
+        def event1 = new TekEvent(name: "Groovy One",
+                city: "San Francisco",
+                organizer: [fullname: "John Doe"] as TekUser,
+                startDate: new Date(),
+                endDate: new Date() - 1)
+
+        then: "the event endDate is valid, event1 endDate is invalid."
+        event.validate(['endDate'])
+        !event1.validate(['endDate'])
+    }
 }

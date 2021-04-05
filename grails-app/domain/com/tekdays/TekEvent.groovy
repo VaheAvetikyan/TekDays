@@ -27,8 +27,10 @@ class TekEvent {
         description maxSize: 5000
         organizer()
         venue()
-        startDate()
-        endDate()
+        startDate blank: false
+        endDate blank: false,
+                // Custom validator for end date to be after start date
+                validator: { date, obj -> !date.before(obj.startDate) }
         sponsorships nullable: true
         volunteers nullable: true
         respondents blank: true

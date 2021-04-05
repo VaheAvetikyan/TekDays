@@ -7,7 +7,7 @@
 
 <body>
 <g:if test="${!session.user}">
-    <div class="page-body">
+    <div id="welcome" class="page-body">
         <h1>Welcome to TekDays.com</h1>
 
         <p>TekDays.com is a site dedicated to assisting individuals and

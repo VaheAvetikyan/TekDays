@@ -15,6 +15,20 @@ class TekUserSpec extends Specification {
     def cleanup() {
     }
 
+    void "test user"() {
+        when: 'you input a valid user'
+        def tekUser = new TekUser(fullName: 'Tek User',
+                userName: 'tekUser',
+                password: 'test15',
+                email: 'info@tekuser.com',
+                website: 'https://www.test.com',
+                bio: 'test')
+
+        then: 'user can be saved'
+        tekUser.validate()
+        tekUser.save()
+    }
+
     void "test email validation"() {
         when: 'you instantiate a user with an invalid email'
         def tekUser = new TekUser(fullName: 'Tek User',

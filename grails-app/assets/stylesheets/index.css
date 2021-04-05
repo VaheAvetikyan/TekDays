@@ -55,6 +55,10 @@
     padding: 0.2em;
 }
 
+#welcome {
+    width: auto;
+}
+
 .page-body {
     text-align: center;
     background-color: #eef;
