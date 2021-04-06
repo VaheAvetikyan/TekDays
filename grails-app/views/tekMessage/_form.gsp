@@ -28,14 +28,5 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: tekMessageInstance, field: 'author', 'error')} required">
-    <label for="author">
-        <g:message code="tekMessage.author.label" default="Author"/>
-        <span class="required-indicator">*</span>
-    </label>
-    <g:select id="author" name="author.id" from="${com.tekdays.TekUser.list()}" optionKey="id" required=""
-              value="${tekMessageInstance?.author?.id}" class="many-to-one"/>
-
-</div>
-
 <g:hiddenField name="event.id" value="${tekMessageInstance?.event?.id}"/>
+<g:hiddenField name="author.id" value="${session.user.id}"/>

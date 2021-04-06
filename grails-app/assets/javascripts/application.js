@@ -8,6 +8,7 @@
 //= require jquery
 //= require_tree .
 //= require_self
+//= require jquery-ui
 
 if (typeof jQuery !== 'undefined') {
 	(function($) {

@@ -8,8 +8,6 @@ class Sponsorship {
     String description
     String notes
 
-    // TODO: toString method and create controller
-
     static constraints = {
         event nullable: false
         sponsor nullable: false

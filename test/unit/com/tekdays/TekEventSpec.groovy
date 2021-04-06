@@ -42,7 +42,7 @@ class TekEventSpec extends Specification {
         !event.validate(['startDate', 'endDate'])
     }
 
-    void "test endDate"() {
+    void "test endDates"() {
         when: "a tekEvent has an end date before start date"
         def event = new TekEvent(name: "Groovy One",
                 city: "San Francisco",
@@ -59,5 +59,21 @@ class TekEventSpec extends Specification {
         then: "the event endDate is valid, event1 endDate is invalid."
         event.validate(['endDate'])
         !event1.validate(['endDate'])
+    }
+
+    void "test endDate"() {
+        expect:
+        new TekEvent(name: "Test",
+                city: "Test",
+                organizer: [fullname: "Test"] as TekUser,
+                startDate: startDate,
+                endDate: endDate).validate(['endDate']) == ShouldBeValid
+
+        where:
+        startDate              | endDate                | ShouldBeValid
+        new Date()             | new Date()             | true
+        new Date(2021, 01, 01) | new Date(2020, 10, 10) | false
+        new Date()             | new Date() - 1         | false
+        new Date()             | new Date() + 1         | true
     }
 }

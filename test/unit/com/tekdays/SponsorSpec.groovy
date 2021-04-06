@@ -15,10 +15,29 @@ class SponsorSpec extends Specification {
     def cleanup() {
     }
 
-    void "test sponsor name"() {
-        when:
-        def sponsor = new Sponsor(name: '', website: 'https://www.test.com')
-        then:
-        !sponsor.validate(["name"])
+    void "test name"() {
+        expect:
+        new Sponsor(name: sponsorName).validate(['name']) == shouldBe
+
+        where:
+        sponsorName | shouldBe
+        ''          | false
+        'sponsor'   | true
+        null        | false
+        "Test"      | true
+    }
+
+    void "test website"() {
+        expect:
+        new Sponsor(website: sponsorWebsite).validate(['website']) == shouldBe
+
+        where:
+        sponsorWebsite            | shouldBe
+        ''                        | false
+        'sponsor.com'             | false
+        null                      | false
+        "www.sponsor.com"         | false
+        "http://www.sponsor.com"  | true
+        "https://www.sponsor.com" | true
     }
 }

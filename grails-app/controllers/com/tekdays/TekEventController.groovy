@@ -24,6 +24,17 @@ class TekEventController {
         respond tekEventInstance
     }
 
+    def volunteer = {
+        def event = TekEvent.get(params.id)
+        event.addToVolunteers(session.user)
+        event.save flush: true
+        render "Thank you for Volunteering"
+//        render(contentType: 'text/json') {
+//            ['body': "Thank you for Volunteering",
+//             'data': "<a href='/TekDays/tekUser/show/${params.id}'>${session.user.fullName}</a>"]
+//        }
+    }
+
     def create() {
         respond new TekEvent(params)
     }
@@ -43,7 +54,7 @@ class TekEventController {
         tekEventInstance.save flush: true
 
         // Logger for event creation
-        LOGGER.info("New event created with name: ${tekEventInstance?.name}")
+        LOGGER.info("Event with name: ${tekEventInstance?.name}")
 
         taskService.addDefaultTasks(tekEventInstance)
 
