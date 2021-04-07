@@ -23,11 +23,11 @@ class TekEvent {
     }
 
     static constraints = {
-        name()
-        city()
+        name nullable: false, blank: false
+        city nullable: false, blank: false
         description maxSize: 5000
-        organizer()
-        venue()
+        organizer nullable: false
+        venue nullable: false, blank: false
         startDate blank: false
         endDate blank: false,
                 // Custom validator for end date to be after start date
