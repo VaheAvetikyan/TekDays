@@ -19,7 +19,24 @@ class TekUserController {
         respond TekUser.list(params), model: [tekUserInstanceCount: TekUser.count()]
     }
 
-    def show(TekUser tekUserInstance) {
+    def show(Long id) {
+        def tekUserInstance
+        if (params.userName) {
+            tekUserInstance = TekUser.findByUserName(params.userName)
+        }
+        else {
+            tekUserInstance = TekUser.get(params.id)
+        }
+        if(!tekUserInstance) {
+            if(params.userName){
+                flash.message = "User not found with username ${params.userName}"
+            }
+            else {
+                flash.message = "User not found with id $id"
+            }
+            redirect(action: "index")
+            return
+        }
         respond tekUserInstance
     }
 

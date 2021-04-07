@@ -9,6 +9,7 @@ class TekEvent {
     Date startDate
     Date endDate
     String description
+    String nickname
 
     static hasMany = [volunteers  : TekUser,
                       respondents : String,
@@ -36,6 +37,7 @@ class TekEvent {
         respondents blank: true
         tasks nullable: true
         messages nullable: true
+        nickname nullable: true, unique: true
     }
 
     static mapping = {

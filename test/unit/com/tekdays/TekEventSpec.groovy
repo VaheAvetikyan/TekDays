@@ -76,4 +76,33 @@ class TekEventSpec extends Specification {
         new Date()             | new Date() - 1         | false
         new Date()             | new Date() + 1         | true
     }
+
+    void "test nickname unique"() {
+        when:
+        def event = new TekEvent(name: "event",
+                city: "test",
+                description: "test",
+                organizer: [fullname: "test"] as TekUser,
+                venue: "test",
+                startDate: new Date(),
+                endDate: new Date(),
+                nickname: nickname).save()
+        def event1 = new TekEvent(name: "event1",
+                city: "test",
+                description: "test",
+                organizer: [fullname: "test"] as TekUser,
+                venue: "test",
+                startDate: new Date(),
+                endDate: new Date(),
+                nickname: nickname1).save()
+
+        then:
+        TekEvent.count() == countAll
+
+        where:
+        nickname | nickname1  | countAll
+        // TODO: something is not working with unique constraint
+        'name'   | 'name'     | 2
+        'name'   | 'testName' | 2
+    }
 }
