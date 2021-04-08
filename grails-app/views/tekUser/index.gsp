@@ -41,6 +41,8 @@
 
             <g:sortableColumn property="bio" title="${message(code: 'tekUser.bio.label', default: 'Bio')}"/>
 
+            <th>Get Rev</th>
+
         </tr>
         </thead>
         <tbody>
@@ -57,6 +59,8 @@
                 <td>${fieldValue(bean: tekUserInstance, field: "website")}</td>
 
                 <td>${fieldValue(bean: tekUserInstance, field: "bio")}</td>
+
+                <td><g:link action="revisions" id="${tekUserInstance.id}">${tekUserInstance.id}</g:link></td>
 
             </tr>
         </g:each>

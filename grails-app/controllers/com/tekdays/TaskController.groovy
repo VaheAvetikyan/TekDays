@@ -1,7 +1,14 @@
 package com.tekdays
 
+import org.hibernate.envers.AuditReader
+import org.hibernate.envers.AuditReaderFactory
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.orm.jpa.EntityManagerFactoryUtils
+
+import javax.persistence.EntityManager
+import javax.persistence.EntityManagerFactory
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -109,8 +116,13 @@ class TaskController {
         }
     }
 
+    def entityManagerFactory
+    EntityManager em
+
     def revisions() {
-        def revisionList = Task.findAllRevisionsById(params.id, [sort: 'id'])
+        em = EntityManagerFactoryUtils.getTransactionalEntityManager(entityManagerFactory)
+        AuditReader auditReader = AuditReaderFactory.get(em)
+        def revisionList = auditReader.getRevisions(Task.class, params.id) // Task.findAllRevisionsById(params.id)
         [revisionList: revisionList]
     }
 }

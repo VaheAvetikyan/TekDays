@@ -160,4 +160,9 @@ class TekUserController {
             '*' { render status: NOT_FOUND }
         }
     }
+
+    def revisions() {
+        def revisionList = TekUser.findAllRevisionsById(params.id)
+        [revisionList: revisionList]
+    }
 }

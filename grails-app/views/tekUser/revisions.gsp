@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'task.label', default: 'Task')}"/>
+    <g:set var="entityName" value="${message(code: 'tekUser.label', default: 'TekUser')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
 </head>
 
@@ -14,13 +14,7 @@
         <th>RevId</th>
         <th>RevType</th>
         <th>Version</th>
-        <th>Title</th>
-        <th>Competed</th>
-        <th>DueDate</th>
-        <th>Notes</th>
-        <th>AssignedToId</th>
-        <th>ChangedDate</th>
-        <th>User</th>
+        <th>FullName</th>
     </tr>
     </thead>
     <tbody>
@@ -29,13 +23,7 @@
             <td>"${rev.id}"</td>
             <td>"${rev.revType}"</td>
             <td>"${rev.version}"</td>
-            <td>"${rev.Title}"</td>
-            <td>"${rev.completed}"</td>
-            <td>"${rev.dueDate}"</td>
-            <td>"${rev.notes}"</td>
-            <td>"${rev.assignedTo}"</td>
-            <td>"${rev?.revisionEntity?.revisionDate}"</td>
-            <td>"${rev?.revisionEntity?.currentUser}"</td>
+            <td>"${rev.fullName}"</td>
         </tr>
     </g:each>
     </tbody>
