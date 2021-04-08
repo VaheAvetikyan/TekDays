@@ -1,5 +1,10 @@
 package com.tekdays
 
+import org.hibernate.SessionFactory
+import org.hibernate.envers.AuditReader
+import org.hibernate.envers.AuditReaderFactory
+import org.hibernate.envers.query.AuditEntity
+import org.hibernate.envers.query.AuditQuery
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -8,6 +13,7 @@ import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class TaskController {
+    SessionFactory sessionFactory
 
     // Logger instance
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskController.class)
@@ -110,7 +116,15 @@ class TaskController {
     }
 
     def revisions() {
-        def revisionList = Task.findAllRevisionsById(params.id, [sort: 'id'])
+        def auditQueryCreator = AuditReaderFactory.get(sessionFactory.currentSession).createQuery()
+
+        def revisionList = []
+        AuditQuery query = auditQueryCreator.forRevisionsOfEntity(Task.class, false, true)
+        query.resultList.each {
+            if(it[0].id==params.getLong('id')) {
+                revisionList.add(it)
+            }
+        }
         [revisionList: revisionList]
     }
 }

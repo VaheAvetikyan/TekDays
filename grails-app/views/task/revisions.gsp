@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="com.tekdays.UserRevisionEntity" contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,23 +18,21 @@
         <th>Competed</th>
         <th>DueDate</th>
         <th>Notes</th>
-        <th>AssignedToId</th>
         <th>ChangedDate</th>
         <th>User</th>
     </tr>
     </thead>
-    <g:each in="${revisionList}" var="rev">
+    <g:each in="${revisionList}" var="rev" status="i">
         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-            <td>"${rev.id}"</td>
-            <td>"${rev.revType}"</td>
-            <td>"${rev.version}"</td>
-            <td>"${rev.Title}"</td>
-            <td>"${rev.completed}"</td>
-            <td>"${rev.dueDate}"</td>
-            <td>"${rev.notes}"</td>
-            <td>"${rev.assignedTo}"</td>
-            <td>"${rev?.revisionEntity?.revisionDate}"</td>
-            <td>"${rev?.revisionEntity?.currentUser}"</td>
+            <td>${rev[1]?.id}</td>
+            <td>${rev[2]}</td>
+            <td>${rev[0]?.version}</td>
+            <td>${rev[0]?.title}</td>
+            <td>${rev[0]?.completed}</td>
+            <td>${rev[0]?.dueDate}</td>
+            <td>${rev[0]?.notes}</td>
+            <td>${UserRevisionEntity.read(rev[1]?.id)?.revisionDate?.format('yyyy-MM-dd HH:mm')}</td>
+            <td>${UserRevisionEntity.read(rev[1]?.id)?.currentUser}</td>
         </tr>
     </g:each>
 </table>
