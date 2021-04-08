@@ -1,5 +1,8 @@
 package com.tekdays
 
+import org.hibernate.envers.Audited
+
+@Audited
 class Sponsorship {
 
     TekEvent event

@@ -108,4 +108,9 @@ class TaskController {
             '*' { render status: NOT_FOUND }
         }
     }
+
+    def revisions() {
+        def revisionList = Task.findAllRevisionsById(params.id, [sort: 'id'])
+        [revisionList: revisionList]
+    }
 }

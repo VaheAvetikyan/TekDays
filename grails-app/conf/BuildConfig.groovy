@@ -54,6 +54,9 @@ grails.project.dependency.resolution = {
         // runtime 'org.mariadb.jdbc:mariadb-java-client:2.7.2'
         // test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
         runtime 'mysql:mysql-connector-java:5.1.47'
+        compile ("org.hibernate:hibernate-envers:4.3.11.Final") {
+            transitive = false
+        }
     }
 
     plugins {
