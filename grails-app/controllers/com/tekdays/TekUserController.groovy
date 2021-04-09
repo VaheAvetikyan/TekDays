@@ -1,5 +1,7 @@
 package com.tekdays
 
+import org.hibernate.SessionFactory
+import org.hibernate.envers.AuditReaderFactory
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -23,15 +25,13 @@ class TekUserController {
         def tekUserInstance
         if (params.userName) {
             tekUserInstance = TekUser.findByUserName(params.userName)
-        }
-        else {
+        } else {
             tekUserInstance = TekUser.get(params.id)
         }
-        if(!tekUserInstance) {
-            if(params.userName){
+        if (!tekUserInstance) {
+            if (params.userName) {
                 flash.message = "User not found with username ${params.userName}"
-            }
-            else {
+            } else {
                 flash.message = "User not found with id $id"
             }
             redirect(action: "index")
@@ -161,8 +161,10 @@ class TekUserController {
         }
     }
 
+    RevisionsService revisionsService
+
     def revisions() {
-        def revisionList = TekUser.findAllRevisionsById(params.id)
+        def revisionList = revisionsService.getRevisionResults(TekUser.class, params.getLong('id'))
         [revisionList: revisionList]
     }
 }
