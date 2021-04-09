@@ -1,12 +1,10 @@
 package com.tekdays
 
-import org.hibernate.SessionFactory
-import org.hibernate.envers.AuditReaderFactory
+import grails.transaction.Transactional
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 import static org.springframework.http.HttpStatus.*
-import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class TekUserController {

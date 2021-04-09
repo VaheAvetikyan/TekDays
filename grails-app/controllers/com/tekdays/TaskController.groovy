@@ -1,9 +1,6 @@
 package com.tekdays
 
 import grails.transaction.Transactional
-import org.hibernate.SessionFactory
-import org.hibernate.envers.AuditReaderFactory
-import org.hibernate.envers.query.AuditQuery
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
