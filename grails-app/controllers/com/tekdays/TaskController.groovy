@@ -1,20 +1,19 @@
 package com.tekdays
 
+import org.hibernate.SessionFactory
 import org.hibernate.envers.AuditReader
 import org.hibernate.envers.AuditReaderFactory
+import org.hibernate.envers.query.AuditEntity
+import org.hibernate.envers.query.AuditQuery
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.orm.jpa.EntityManagerFactoryUtils
-
-import javax.persistence.EntityManager
-import javax.persistence.EntityManagerFactory
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class TaskController {
+    SessionFactory sessionFactory
 
     // Logger instance
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskController.class)
@@ -116,13 +115,16 @@ class TaskController {
         }
     }
 
-    def entityManagerFactory
-    EntityManager em
-
     def revisions() {
-        em = EntityManagerFactoryUtils.getTransactionalEntityManager(entityManagerFactory)
-        AuditReader auditReader = AuditReaderFactory.get(em)
-        def revisionList = auditReader.getRevisions(Task.class, params.id) // Task.findAllRevisionsById(params.id)
+        def auditQueryCreator = AuditReaderFactory.get(sessionFactory.currentSession).createQuery()
+
+        def revisionList = []
+        AuditQuery query = auditQueryCreator.forRevisionsOfEntity(Task.class, false, true)
+        query.resultList.each {
+            if(it[0].id==params.getLong('id')) {
+                revisionList.add(it)
+            }
+        }
         [revisionList: revisionList]
     }
 }
