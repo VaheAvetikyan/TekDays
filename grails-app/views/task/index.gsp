@@ -48,7 +48,9 @@
                 <td><g:formatDate date="${taskInstance.dueDate}"/></td>
                 <td><g:formatBoolean boolean="${taskInstance.completed}"/></td>
                 <td>${fieldValue(bean: taskInstance, field: "event")}</td>
-                <td><g:link action="revisions" id="${taskInstance?.id}">${taskInstance?.id}</g:link></td>
+                <td><g:link controller="revisions" action="revisionSelect"
+                            params="[type: taskInstance.getClass().name]"
+                            id="${taskInstance?.id}">${taskInstance?.id}</g:link></td>
             </tr>
         </g:each>
         </tbody>

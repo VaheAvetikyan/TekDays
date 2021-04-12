@@ -1,10 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="com.tekdays.TekEvent" contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'tekUser.label', default: 'TekUser')}"/>
-    <title><g:message code="default.list.label" args="[entityName]"/></title>
+    <g:set var="entityName" value="${message(code: 'revisions.label', default: 'Revisions')}"/>
+    <title>Revisions</title>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
 </div>
 
 <div class="content scaffold-list" role="main">
-    <g:showRevisions revisionList="${revisionList}"/>
+    <g:showRevisions revisionList="${revisionList}" showList="${showList}"/>
 </div>
 </body>
 </html>

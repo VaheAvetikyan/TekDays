@@ -158,11 +158,4 @@ class TekUserController {
             '*' { render status: NOT_FOUND }
         }
     }
-
-    RevisionsService revisionsService
-
-    def revisions() {
-        def revisionList = revisionsService.getRevisionResults(TekUser.class, params.getLong('id'))
-        [revisionList: revisionList]
-    }
 }

@@ -47,7 +47,9 @@
                 <td>${fieldValue(bean: tekUserInstance, field: "email")}</td>
                 <td>${fieldValue(bean: tekUserInstance, field: "website")}</td>
                 <td>${fieldValue(bean: tekUserInstance, field: "bio")}</td>
-                <td><g:link action="revisions" id="${tekUserInstance.id}">${tekUserInstance.id}</g:link></td>
+                <td><g:link controller="revisions" action="revisionSelect"
+                            params="[type: tekUserInstance.getClass().name]"
+                            id="${tekUserInstance.id}">${tekUserInstance.id}</g:link></td>
             </tr>
         </g:each>
         </tbody>

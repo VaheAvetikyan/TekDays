@@ -3,13 +3,14 @@
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'tekEvent.label', default: 'TekEvent')}"/>
-    <title><g:message code="default.list.label" args="[entityName]"/></title>
+    <g:set var="entityName" value="${message(code: 'revisions.label', default: 'Select Revisions')}"/>
+    <title>Select Revisions</title>
 </head>
 
 <body>
-<g:form url="[resource: tekEventInstance, action: 'revisions']" method="PUT">
+<g:form url="[resource: revisions, action: 'revisions']" method="PUT">
     <g:hiddenField name="id" value="${instance.id}"/>
+    <g:hiddenField name="type" value="${instance.getClass().name}"/>
     <fieldset class="form">
         <label for="showList">Select Fields to Show Revisions of</label>
         <g:select name="showList" from="${instance.properties.keySet()}" multiple="multiple" size="10" required=""

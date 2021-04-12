@@ -108,11 +108,4 @@ class TaskController {
             '*' { render status: NOT_FOUND }
         }
     }
-
-    RevisionsService revisionsService
-
-    def revisions() {
-        def revisionList = revisionsService.getRevisionResults(Task.class, params.getLong('id'))
-        [revisionList: revisionList]
-    }
 }

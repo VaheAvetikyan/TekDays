@@ -28,31 +28,25 @@
     <table>
         <thead>
         <tr>
-
             <g:sortableColumn property="name" title="${message(code: 'sponsor.name.label', default: 'Name')}"/>
-
             <g:sortableColumn property="website" title="${message(code: 'sponsor.website.label', default: 'Website')}"/>
-
             <g:sortableColumn property="description"
                               title="${message(code: 'sponsor.description.label', default: 'Description')}"/>
-
             <g:sortableColumn property="logo" title="${message(code: 'sponsor.logo.label', default: 'Logo')}"/>
-
+            <th>Get Revisions</th>
         </tr>
         </thead>
         <tbody>
         <g:each in="${sponsorInstanceList}" status="i" var="sponsorInstance">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-
                 <td><g:link action="show"
                             id="${sponsorInstance.id}">${fieldValue(bean: sponsorInstance, field: "name")}</g:link></td>
-
                 <td>${fieldValue(bean: sponsorInstance, field: "website")}</td>
-
                 <td>${fieldValue(bean: sponsorInstance, field: "description")}</td>
-
                 <td>${fieldValue(bean: sponsorInstance, field: "logo")}</td>
-
+                <td><g:link controller="revisions" action="revisionSelect"
+                            params="[type: sponsorInstance.getClass().name]"
+                            id="${sponsorInstance?.id}">${sponsorInstance?.id}</g:link></td>
             </tr>
         </g:each>
         </tbody>

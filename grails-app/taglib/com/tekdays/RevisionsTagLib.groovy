@@ -5,6 +5,7 @@ class RevisionsTagLib {
 
     def showRevisions = { attrs ->
         def revisionList = attrs.revisionList
+        List keySet = new ArrayList(revisionList[0][0].properties.keySet())
         if (revisionList) {
             out << """
             <table><thead><tr>
@@ -13,9 +14,9 @@ class RevisionsTagLib {
             <th>RevType</th>
             <th>ChangedDate</th>
             <th>User</th>"""
-            revisionList[0][0].properties.each {
-                if (it?.key in attrs.showList) {
-                    out << "<th>${it?.key}</th>"
+            keySet.each { k ->
+                if (k in attrs.showList) {
+                    out << "<th>${k}</th>"
                 }
             }
             out << "</tr></thead><tbody>"
@@ -28,9 +29,9 @@ class RevisionsTagLib {
                 <td>${new Date(it[1]?.timestamp).format('yyyy-MM-dd HH:mm')}</td>"""
                 def user = it[1]?.currentUser
                 out << "<td>${link(controller: 'tekUser', action: 'show', id: it[1]?.currentUserId) { user }}</td>"
-                it[0].properties.each {
-                    if (it?.key in attrs.showList) {
-                        out << "<td>${it?.value}</td>"
+                keySet.each { k ->
+                    if (k in attrs.showList) {
+                        out << "<td>${it[0].properties."${k}"}</td>"
                     }
                 }
                 out << "</tr>"

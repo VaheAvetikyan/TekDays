@@ -47,7 +47,8 @@
                 <td>${fieldValue(bean: tekEventInstance, field: "description")}</td>
                 <td>${fieldValue(bean: tekEventInstance, field: "venue")}</td>
                 <td><g:formatDate date="${tekEventInstance.startDate}"/></td>
-                <td><g:link action="revisionSelect"
+                <td><g:link controller="revisions" action="revisionSelect"
+                            params="[type: tekEventInstance.getClass().name]"
                             id="${tekEventInstance.id}">${tekEventInstance.id}</g:link></td>
             </tr>
         </g:each>

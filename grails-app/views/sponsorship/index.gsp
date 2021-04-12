@@ -28,36 +28,28 @@
     <table>
         <thead>
         <tr>
-
             <th><g:message code="sponsorship.event.label" default="Event"/></th>
-
             <th><g:message code="sponsorship.sponsor.label" default="Sponsor"/></th>
-
             <g:sortableColumn property="contributionType"
                               title="${message(code: 'sponsorship.contributionType.label', default: 'Contribution Type')}"/>
-
             <g:sortableColumn property="description"
                               title="${message(code: 'sponsorship.description.label', default: 'Description')}"/>
-
             <g:sortableColumn property="notes" title="${message(code: 'sponsorship.notes.label', default: 'Notes')}"/>
-
+            <th>Get Revisions</th>
         </tr>
         </thead>
         <tbody>
         <g:each in="${sponsorshipInstanceList}" status="i" var="sponsorshipInstance">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-
                 <td><g:link action="show"
                             id="${sponsorshipInstance.id}">${fieldValue(bean: sponsorshipInstance, field: "event")}</g:link></td>
-
                 <td>${fieldValue(bean: sponsorshipInstance, field: "sponsor")}</td>
-
                 <td>${fieldValue(bean: sponsorshipInstance, field: "contributionType")}</td>
-
                 <td>${fieldValue(bean: sponsorshipInstance, field: "description")}</td>
-
                 <td>${fieldValue(bean: sponsorshipInstance, field: "notes")}</td>
-
+                <td><g:link controller="revisions" action="revisionSelect"
+                            params="[type: sponsorshipInstance.getClass().name]"
+                            id="${sponsorshipInstance?.id}">${sponsorshipInstance?.id}</g:link></td>
             </tr>
         </g:each>
         </tbody>

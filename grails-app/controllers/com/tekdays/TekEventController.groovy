@@ -1,10 +1,10 @@
 package com.tekdays
 
+import grails.transaction.Transactional
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 import static org.springframework.http.HttpStatus.*
-import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class TekEventController {
@@ -153,16 +153,5 @@ class TekEventController {
             }
             '*' { render status: NOT_FOUND }
         }
-    }
-
-    RevisionsService revisionsService
-
-    def revisions() {
-        def revisionList = revisionsService.getRevisionResults(TekEvent.class, params.getLong('id'))
-        [revisionList: revisionList, showList: params.showList]
-    }
-
-    def revisionSelect() {
-        [instance: TekEvent.get(params.id)]
     }
 }

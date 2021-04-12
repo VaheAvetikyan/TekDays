@@ -29,36 +29,24 @@
     <table>
         <thead>
         <tr>
-
             <g:sortableColumn property="subject"
                               title="${message(code: 'tekMessage.subject.label', default: 'Subject')}"/>
-
             <g:sortableColumn property="content"
                               title="${message(code: 'tekMessage.content.label', default: 'Content')}"/>
-
             <th><g:message code="tekMessage.parent.label" default="Parent"/></th>
-
             <th><g:message code="tekMessage.author.label" default="Author"/></th>
-
             <th><g:message code="tekMessage.event.label" default="Event"/></th>
-
         </tr>
         </thead>
         <tbody>
         <g:each in="${tekMessageInstanceList}" status="i" var="tekMessageInstance">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-
                 <td><g:link action="show"
                             id="${tekMessageInstance.id}">${fieldValue(bean: tekMessageInstance, field: "subject")}</g:link></td>
-
                 <td>${fieldValue(bean: tekMessageInstance, field: "content")}</td>
-
                 <td>${fieldValue(bean: tekMessageInstance, field: "parent")}</td>
-
                 <td>${fieldValue(bean: tekMessageInstance, field: "author")}</td>
-
                 <td>${fieldValue(bean: tekMessageInstance, field: "event")}</td>
-
             </tr>
         </g:each>
         </tbody>
