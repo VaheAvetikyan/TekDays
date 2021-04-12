@@ -28,43 +28,27 @@
     <table>
         <thead>
         <tr>
-
             <g:sortableColumn property="title" title="${message(code: 'task.title.label', default: 'Title')}"/>
-
             <g:sortableColumn property="notes" title="${message(code: 'task.notes.label', default: 'Notes')}"/>
-
             <th><g:message code="task.assignedTo.label" default="Assigned To"/></th>
-
             <g:sortableColumn property="dueDate" title="${message(code: 'task.dueDate.label', default: 'Due Date')}"/>
-
             <g:sortableColumn property="completed"
                               title="${message(code: 'task.completed.label', default: 'Completed')}"/>
-
             <th><g:message code="task.event.label" default="Event"/></th>
-
-            <th>Get Rev</th>
-
+            <th>Get Revisions</th>
         </tr>
         </thead>
         <tbody>
         <g:each in="${taskInstanceList}" status="i" var="taskInstance">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-
                 <td><g:link action="show"
                             id="${taskInstance.id}">${fieldValue(bean: taskInstance, field: "title")}</g:link></td>
-
                 <td>${fieldValue(bean: taskInstance, field: "notes")}</td>
-
                 <td>${fieldValue(bean: taskInstance, field: "assignedTo")}</td>
-
                 <td><g:formatDate date="${taskInstance.dueDate}"/></td>
-
                 <td><g:formatBoolean boolean="${taskInstance.completed}"/></td>
-
                 <td>${fieldValue(bean: taskInstance, field: "event")}</td>
-
                 <td><g:link action="revisions" id="${taskInstance?.id}">${taskInstance?.id}</g:link></td>
-
             </tr>
         </g:each>
         </tbody>

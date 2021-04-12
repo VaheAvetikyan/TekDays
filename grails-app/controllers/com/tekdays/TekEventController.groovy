@@ -13,7 +13,7 @@ class TekEventController {
     private static final Logger LOGGER = LoggerFactory.getLogger(TekEventController.class)
 
     def taskService
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", revisions: "PUT"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -22,17 +22,15 @@ class TekEventController {
 
     def show(Long id) {
         def tekEventInstance
-        if(params.nickname){
+        if (params.nickname) {
             tekEventInstance = TekEvent.findByNickname(params.nickname)
-        }
-        else {
+        } else {
             tekEventInstance = TekEvent.get(id)
         }
         if (!tekEventInstance) {
-            if(params.nickname){
+            if (params.nickname) {
                 flash.message = "Event not found with nickname ${params.nickname}"
-            }
-            else {
+            } else {
                 flash.message = "Event not found with id $id"
             }
             redirect(action: "index")
@@ -155,5 +153,16 @@ class TekEventController {
             }
             '*' { render status: NOT_FOUND }
         }
+    }
+
+    RevisionsService revisionsService
+
+    def revisions() {
+        def revisionList = revisionsService.getRevisionResults(TekEvent.class, params.getLong('id'))
+        [revisionList: revisionList, showList: params.showList]
+    }
+
+    def revisionSelect() {
+        [instance: TekEvent.get(params.id)]
     }
 }

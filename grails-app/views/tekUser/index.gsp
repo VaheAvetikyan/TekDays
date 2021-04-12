@@ -28,40 +28,26 @@
     <table>
         <thead>
         <tr>
-
             <g:sortableColumn property="fullName"
                               title="${message(code: 'tekUser.fullName.label', default: 'Full Name')}"/>
-
             <g:sortableColumn property="userName"
                               title="${message(code: 'tekUser.userName.label', default: 'User Name')}"/>
-
             <g:sortableColumn property="email" title="${message(code: 'tekUser.email.label', default: 'Email')}"/>
-
             <g:sortableColumn property="website" title="${message(code: 'tekUser.website.label', default: 'Website')}"/>
-
             <g:sortableColumn property="bio" title="${message(code: 'tekUser.bio.label', default: 'Bio')}"/>
-
-            <th>Get Rev</th>
-
+            <th>Get Revisions</th>
         </tr>
         </thead>
         <tbody>
         <g:each in="${tekUserInstanceList}" status="i" var="tekUserInstance">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-
                 <td><g:link action="show"
                             id="${tekUserInstance.id}">${fieldValue(bean: tekUserInstance, field: "fullName")}</g:link></td>
-
                 <td>${fieldValue(bean: tekUserInstance, field: "userName")}</td>
-
                 <td>${fieldValue(bean: tekUserInstance, field: "email")}</td>
-
                 <td>${fieldValue(bean: tekUserInstance, field: "website")}</td>
-
                 <td>${fieldValue(bean: tekUserInstance, field: "bio")}</td>
-
                 <td><g:link action="revisions" id="${tekUserInstance.id}">${tekUserInstance.id}</g:link></td>
-
             </tr>
         </g:each>
         </tbody>

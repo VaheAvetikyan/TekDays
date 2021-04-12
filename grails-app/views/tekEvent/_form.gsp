@@ -2,6 +2,7 @@
 
 <f:with bean="tekEventInstance">
     <f:field property="name"/>
+    <f:field property="nickname"/>
     <f:field property="city"/>
     <f:field property="venue"/>
     <f:field property="description">

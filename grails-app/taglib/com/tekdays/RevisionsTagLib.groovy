@@ -14,7 +14,9 @@ class RevisionsTagLib {
             <th>ChangedDate</th>
             <th>User</th>"""
             revisionList[0][0].properties.each {
-                out << "<th>${it?.key}</th>"
+                if (it?.key in attrs.showList) {
+                    out << "<th>${it?.key}</th>"
+                }
             }
             out << "</tr></thead><tbody>"
             def classIndex = 0
@@ -23,10 +25,13 @@ class RevisionsTagLib {
                 <td>${it[0]?.version}</td>
                 <td>${it[1]?.id}</td>
                 <td>${it[2]}</td>
-                <td>${new Date(it[1]?.timestamp).format('yyyy-MM-dd HH:mm')}</td>
-                <td>${it[1]?.currentUser}</td>"""
+                <td>${new Date(it[1]?.timestamp).format('yyyy-MM-dd HH:mm')}</td>"""
+                def user = it[1]?.currentUser
+                out << "<td>${link(controller: 'tekUser', action: 'show', id: it[1]?.currentUserId) { user }}</td>"
                 it[0].properties.each {
-                    out << "<td>${it?.value}</td>"
+                    if (it?.key in attrs.showList) {
+                        out << "<td>${it?.value}</td>"
+                    }
                 }
                 out << "</tr>"
             }
