@@ -47,5 +47,7 @@ class TekEvent {
         sponsorships cascade: 'all-delete-orphan'
         tasks cascade: 'all-delete-orphan'
         messages cascade: 'all-delete-orphan'
+        organizer lazy: false
+        volunteers lazy: false
     }
 }
