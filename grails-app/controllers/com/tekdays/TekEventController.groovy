@@ -13,6 +13,8 @@ class TekEventController {
     private static final Logger LOGGER = LoggerFactory.getLogger(TekEventController.class)
 
     def taskService
+    def datatablesSourceService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", revisions: "PUT"]
 
     def index(Integer max) {
@@ -153,5 +155,14 @@ class TekEventController {
             }
             '*' { render status: NOT_FOUND }
         }
+    }
+
+    def dtList () {
+    }
+
+    def dataTablesRenderer() {
+        def propertiesToRender = ["name", "city", "id"]
+        def entityName = 'TekEvent'
+        render  datatablesSourceService.dataTablesSource(propertiesToRender, entityName, params)
     }
 }

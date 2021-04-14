@@ -7,7 +7,7 @@ class TekDaysTagLib {
         processMessages(messages, 0)
     }
 
-    void processMessages(messages, indent) {
+    private void processMessages(messages, indent) {
         messages.each { msg ->
             def body = "${msg?.author} - ${msg?.subject}"
             out << "<p style='height:35; margin-left:${indent * 20}px;'>"

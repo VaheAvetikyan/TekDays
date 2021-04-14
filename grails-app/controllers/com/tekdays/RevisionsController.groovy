@@ -4,12 +4,6 @@ class RevisionsController {
 
     RevisionsService revisionsService
 
-    def revisions() {
-        Class cls = Class.forName(params.type)
-        def revisionList = revisionsService.getRevisionResults(cls, params.getLong('id'))
-        [revisionList: revisionList, showList: params.showList]
-    }
-
     def revisionSelect() {
         if (!params.type) {
             redirect(uri: '/')
@@ -18,6 +12,12 @@ class RevisionsController {
         Class cls = Class.forName(params.type)
         def instance = cls.get(params.id)
         [instance: instance]
+    }
+
+    def revisions() {
+        Class cls = Class.forName(params.type)
+        def revisionList = revisionsService.getRevisionResults(cls, params.getLong('id'))
+        [revisionList: revisionList, showList: params.showList]
     }
 
     def compare() {
