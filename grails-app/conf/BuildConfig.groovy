@@ -57,6 +57,7 @@ grails.project.dependency.resolution = {
         compile ("org.hibernate:hibernate-envers:4.3.11.Final") {
             transitive = false
         }
+        compile 'net.sf.jasperreports:jasperreports:5.6.0'
     }
 
     plugins {
@@ -68,6 +69,7 @@ grails.project.dependency.resolution = {
         compile ':cache:1.1.8'
         // asset-pipeline 2.0+ requires Java 7, use version 1.9.x with Java 6
         compile ":asset-pipeline:2.5.7"
+        compile ':jasper:1.10.0'
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.10" // or ":hibernate:3.6.10.18"

@@ -114,6 +114,13 @@
 
 <div id="list-tekEvent" class="content scaffold-list" role="main">
     <h1><g:message code="default.list.label" args="[entityName]"/></h1>
+    <br>
+    <g:jasperReport jasper="tekEventList" format="XLS,PDF,HTML"
+                    description="tekEventList"
+                    name="tekEventList">
+    </g:jasperReport>
+
+    <br>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>

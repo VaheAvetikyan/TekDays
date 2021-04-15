@@ -25,6 +25,12 @@
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
+
+    <g:jasperReport jasper="taskList" format="XLS,PDF"
+                    description="taskList"
+                    name="taskList">
+    </g:jasperReport>
+
     <table>
         <thead>
         <tr>
