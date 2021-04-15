@@ -16,7 +16,7 @@ class SecurityFilters {
                     return true
                 }
                 def allowedActions = ['show', 'index', 'login',
-                                      'validate']
+                                      'validate', 'dataTablesRenderer']
                 if (!session.user && !allowedActions.contains(actionName) ||
                         !session.user && controllerName == 'tekMessage') {
                     redirect(controller: 'tekUser', action: 'login',

@@ -17,9 +17,8 @@ class TekEventController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", revisions: "PUT"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond TekEvent.list(params), model: [tekEventInstanceCount: TekEvent.count()]
+    def index() {
+        [properties: ["name", "city", "venue", "start date", "end date", "description", "organizer", "edit", "get revisions", "organizerId"]]
     }
 
     def show(Long id) {
@@ -157,12 +156,9 @@ class TekEventController {
         }
     }
 
-    def dtList () {
-    }
-
     def dataTablesRenderer() {
-        def propertiesToRender = ["name", "city", "id"]
+        def propertiesToRender = ["name", "city", "venue", "startDate", "endDate", "description", "organizer", "id", "id", "organizerId"]
         def entityName = 'TekEvent'
-        render  datatablesSourceService.dataTablesSource(propertiesToRender, entityName, params)
+        render datatablesSourceService.dataTablesSource(propertiesToRender, entityName, params)
     }
 }
