@@ -25,6 +25,11 @@
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
+
+    <div class="page-body">
+        <g:jasperCustom entityName="${entityName}"/>
+    </div>
+
     <table>
         <thead>
         <tr>

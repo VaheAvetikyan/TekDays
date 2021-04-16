@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="spo" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="908f7bdd-4c44-4a77-a57e-3334bf69f5d3">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select sp.description, sp.name as Sponsor, sp.website, sp.logo, ss.contribution_type, ss.description, te.name as Event  from sponsor sp join sponsorship ss on sp.id = ss.sponsor_id join tek_event te on te.id = ss.event_id order by sp.id]]>
+	</queryString>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Sponsor" class="java.lang.String"/>
+	<field name="website" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="logo" class="java.lang.Object">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="contribution_type" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Event" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="41" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" uuid="91ae2f58-b4c1-4c0b-b9c1-9253bd1ad801"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sponsors"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="48">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="b43782e0-7ec3-4ad6-a2fe-6e05498a0450"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sponsor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="20" width="100" height="20" uuid="4789c86e-6fd8-4642-97ac-54b49a0212f3"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="20" width="100" height="20" uuid="1055c02f-5e08-4ebe-8d9d-6fbff5034e9e"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contribution Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="0" width="154" height="20" uuid="c3f0a61b-6891-4100-aafe-cf0fed165813"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Website]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="256" y="20" width="100" height="20" uuid="6dc912a8-f4f1-4c45-ad91-9235c526f1c9"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Event]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="40" width="554" height="1" uuid="cfcbf271-4aa8-4c64-9617-8f98b0cb4f9a"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="100" y="0" width="154" height="17" uuid="1cf502be-baa3-45a4-9a69-20a1550c5848"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arian AMU" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{website}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="454" y="0" width="100" height="24" uuid="94001289-3ecd-4a37-8951-2157264d48ad"/>
+				<box bottomPadding="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arian AMU" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="354" y="0" width="100" height="24" uuid="db48050a-410c-4be4-86c3-74de242597ba"/>
+				<box bottomPadding="9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arian AMU" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contribution_type}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="100" height="17" uuid="2ddcf99a-8392-47dc-9116-b89519ca852f"/>
+				<textElement>
+					<font fontName="Arian AMU" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Sponsor}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="254" y="0" width="100" height="24" uuid="32dd197a-915a-42e3-8cf5-8f54874ad40a"/>
+				<box bottomPadding="9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arian AMU" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Event}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="50"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="0" width="100" height="20" uuid="b99fec04-c727-41e4-a6ec-83cdbc61921d"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="495" y="0" width="60" height="20" uuid="de4e511d-0fd4-4397-b234-611ffd2feb50"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

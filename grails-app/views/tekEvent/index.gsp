@@ -21,22 +21,17 @@
                 bStateSave: true,
                 aoColumnDefs: [
                     {
-                        visible: false,
-                        aTargets: [9]
+                         render: function (data, type, full, meta) {
+                            if (full) {
+                                return '<a href="${createLink(action: 'show')}/' + full[7] + '" class="btn">' + data + '</a>';
+                            } else {
+                                return data;
+                            }
+                        },
+                        aTargets: [0]
                     },
                     {
                         bSearchable: false,
-                        aTargets: [3, 4, 7, 9]
-                    },
-                    {
-                        bSortable: false,
-                        aTargets: [5, 7, 9]
-                    },
-                    {
-                        aTargets: [0],
-                        'visible': false
-                    },
-                    {
                         render: function (data) {
                             if (data) {
                                 let d = new Date(data);
@@ -49,7 +44,23 @@
                                 return "";
                             }
                         },
-                        aTargets: [3, 4]
+                        aTargets: [3]
+                    },
+                    {
+                        bSearchable: false,
+                        render: function (data) {
+                            if (data) {
+                                let d = new Date(data);
+                                let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+                                let mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(d);
+                                let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+                                let date = da + '-' + mo + '-' + ye
+                                return date;
+                            } else {
+                                return "";
+                            }
+                        },
+                        aTargets: [4]
                     },
                     {
                          render: function (data, type, full, meta) {
@@ -61,17 +72,9 @@
                         },
                         aTargets: [6]
                     },
-                    {
-                         render: function (data, type, full, meta) {
-                            if (full) {
-                                return '<a href="${createLink(action: 'show')}/' + full[7] + '" class="btn">' + data + '</a>';
-                            } else {
-                                return data;
-                            }
-                        },
-                        aTargets: [0]
-                    },
-                    {
+                     {
+                         bSearchable: false,
+                         bSortable: false,
                         createdCell: function (td, cellData, rowData, row, col) {
                             $(td).attr('style', 'text-align: center;');
                         },
@@ -85,6 +88,8 @@
                         aTargets: [7]
                     },
                     {
+                        bSearchable: false,
+                        bSortable: false,
                         render: function (data, type, full, meta) {
                             if (data) {
                                 return '<a href="${createLink(controller: 'revisions', action: 'revisions')}/' + data + '?type=com.tekdays.TekEvent" class="btn">Revisions</a>';
@@ -93,6 +98,11 @@
                             }
                         },
                         aTargets: [8]
+                    },
+                    {
+                        visible: false,
+                        bSearchable: false,
+                        aTargets: [9]
                     }]
             });
         });
@@ -114,17 +124,15 @@
 
 <div id="list-tekEvent" class="content scaffold-list" role="main">
     <h1><g:message code="default.list.label" args="[entityName]"/></h1>
-    <br>
-    <g:jasperReport jasper="tekEventList" format="XLS,PDF,HTML"
-                    description="tekEventList"
-                    name="tekEventList">
-    </g:jasperReport>
 
-    <br>
+    <div class="page-body">
+        <g:jasperCustom entityName="${entityName}"/>
+    </div>
+
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
-    <table class="compact cell-border order-column hover" id="dt">
+    <table class="compact cell-border hover" id="dt">
         <thead>
         <tr>
             <g:each in="${properties}" var="prop">

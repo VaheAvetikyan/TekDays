@@ -26,10 +26,9 @@
         <div class="message" role="status">${flash.message}</div>
     </g:if>
 
-    <g:jasperReport jasper="taskList" format="XLS,PDF"
-                    description="taskList"
-                    name="taskList">
-    </g:jasperReport>
+    <div class="page-body">
+        <g:jasperCustom entityName="${entityName}"/>
+    </div>
 
     <table>
         <thead>

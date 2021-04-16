@@ -125,3 +125,6 @@ out/
 lib/build/
 
 coverage-error.log
+
+*.jasper
+/web-app/reports/*.pdf

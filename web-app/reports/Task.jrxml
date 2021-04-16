@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="taskList" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a0f6d3d5-8a3c-4f33-b9ab-6c81263209b6">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select completed, due_date, title, notes, full_name, name from task left join tek_user tu on tu.id = task.assigned_to_id left join tek_event te on te.id = task.event_id]]>
+	</queryString>
+	<field name="completed" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="due_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="title" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="notes" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="full_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="35" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="572" height="20" uuid="4b956b23-b157-4ea5-b1c0-e06850da30ae"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arian AMU" size="14" isBold="true" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tasks"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="100" height="20" uuid="35cecc8e-2906-4bc5-990e-d9e16f5ad211"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arian AMU" size="12" isBold="true" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA["title".capitalize()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="200" y="0" width="100" height="20" uuid="68fb519a-714d-4ef9-895b-f823c8115c4f"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arian AMU" size="12" isBold="true" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA["due_date".replace('_',' ').capitalize()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="300" y="0" width="100" height="20" uuid="e8535fad-d047-471c-8131-208428306309"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arian AMU" size="12" isBold="true" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA["notes".capitalize()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="400" y="0" width="59" height="20" uuid="c1c23c0a-f992-40a4-b3db-a501d2f07c1a"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arian AMU" size="12" isBold="true" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA["completed".capitalize()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="100" y="0" width="100" height="20" uuid="2180f45a-3b3b-4a6b-baeb-1bb4b797754b"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arian AMU" size="12" isBold="true" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Assigned to"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="459" y="0" width="100" height="20" uuid="03206ca8-5d2e-4672-92dd-8257776c19ed"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arian AMU" size="12" isBold="true" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Event"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="6" width="100" height="20" uuid="a9c7c957-cc62-4b06-bb28-e7f4328c6f05"/>
+				<box leftPadding="0" bottomPadding="5" rightPadding="1"/>
+				<textElement>
+					<font fontName="Arian AMU" isBold="false" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="200" y="6" width="100" height="20" uuid="d0f04e83-1cad-44e2-9f3c-e2c69a403886"/>
+				<box leftPadding="0" bottomPadding="5" rightPadding="1"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arian AMU" isBold="false" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MMM-yy").format($F{due_date})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="300" y="6" width="100" height="20" uuid="39312ead-dcca-4706-8d39-d0f931b4cd9c"/>
+				<box leftPadding="0" bottomPadding="5" rightPadding="1"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arian AMU" isBold="false" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{notes}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="400" y="6" width="59" height="20" uuid="0ca03a5a-8868-445e-a533-9608d0c334f0"/>
+				<box leftPadding="0" bottomPadding="5" rightPadding="1"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arian AMU" isBold="false" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{completed}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="100" y="6" width="100" height="20" uuid="e1199c78-2991-4886-9d9f-6ca487d9751a"/>
+				<box leftPadding="0" bottomPadding="5" rightPadding="1"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arian AMU" isBold="false" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{full_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="459" y="6" width="100" height="20" uuid="468cec45-3960-4251-971f-3bf67df567db"/>
+				<box leftPadding="0" bottomPadding="5" rightPadding="1"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arian AMU" isBold="false" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="572" height="1" uuid="85e4f5df-07a6-487a-9431-04362d5037a4"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="18" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="100" height="20" uuid="ee34b1c7-c947-4297-8ce0-9ec950266d35"/>
+				<textElement>
+					<font fontName="Arian AMU" isBold="false" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="459" y="0" width="64" height="20" uuid="0c7ca1d8-824a-4c6a-ad15-84f9c2398d84"/>
+				<textElement>
+					<font fontName="Arian AMU" isBold="false" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement x="525" y="0" width="34" height="20" uuid="bef8fa42-3c6d-4586-b339-5b54b5881e27"/>
+				<textElement>
+					<font fontName="Arian AMU" isBold="false" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporttest" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ce1a27ef-e827-4813-929d-6128e9c71fd0">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select * from tek_event]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="version" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="city" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="end_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="organizer_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="start_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="venue" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nickname" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="555" height="20" uuid="649338b4-aafe-42cb-99ba-15e1619c1494"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arian AMU" size="14" isBold="true" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tek Events"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="18" y="0" width="80" height="20" uuid="b4adfe52-e4e6-4efc-bd1d-8b0eed94ac16"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arian AMU" size="12" isBold="true" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA["name".capitalize()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="105" y="0" width="85" height="20" uuid="8aa9538f-2154-4ffe-a96d-dd087e16334e"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arian AMU" size="12" isBold="true" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA["city".capitalize()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="190" y="0" width="66" height="20" uuid="ec6177f2-ccf8-4ec8-98f8-e349ddf8db1e"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arian AMU" size="12" isBold="true" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA["venue".capitalize()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="332" y="0" width="70" height="20" uuid="1468b01e-5e9b-496c-8a53-5be8b5772f85"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arian AMU" size="12" isBold="true" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA["end_date".replace('_', ' ').capitalize()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="401" y="0" width="154" height="20" uuid="89d16146-ff86-4607-b111-e81a7a2c8a65"/>
+				<textElement markup="none">
+					<font fontName="Arian AMU" size="12" isBold="true" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA["description".capitalize()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="263" y="0" width="69" height="20" uuid="b8689aab-8271-4a01-b334-3f5eaa0a6c4e"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arian AMU" size="12" isBold="true" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA["start_date".replace('_', ' ').capitalize()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="20" y="0" width="78" height="20" uuid="17f53272-d427-4031-9273-926b6cee21b1"/>
+				<box bottomPadding="11"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arian AMU" isBold="false" isItalic="false" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="105" y="0" width="85" height="20" uuid="d81a8343-e8ec-43bf-879c-51f30efdfb95"/>
+				<box bottomPadding="11"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arian AMU" isBold="false" isItalic="false" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{city}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="21" height="20" uuid="44b47432-80dc-4a30-8d81-74f7493da87f"/>
+				<box bottomPadding="11"/>
+				<textElement>
+					<font fontName="Arian AMU" isBold="false" isItalic="false" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="263" y="0" width="69" height="20" uuid="be52d814-5bad-482f-bee1-f9c440449746"/>
+				<box bottomPadding="11"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arian AMU" isBold="false" isItalic="false" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MMM-yyyy").format($F{start_date})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="332" y="0" width="70" height="20" uuid="8298605e-9dd3-4667-aa24-09369c55f6f4"/>
+				<box bottomPadding="11"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arian AMU" isBold="false" isItalic="false" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MMM-yyyy").format($F{end_date})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="190" y="0" width="66" height="20" uuid="d794eb26-9288-4462-b8c2-f1044d5a9601"/>
+				<box bottomPadding="11"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arian AMU" isBold="false" isItalic="false" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{venue}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="401" y="0" width="154" height="20" uuid="da08343b-78e1-49a1-911f-f2387d82fbd6"/>
+				<box leftPadding="4" bottomPadding="12"/>
+				<textElement>
+					<font fontName="Arian AMU" isBold="false" isItalic="false" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="0" width="100" height="20" uuid="42f721fc-ce7f-42e9-a86d-c4f654e90d3d"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement x="521" y="0" width="34" height="20" uuid="e35965a7-406a-4a4e-99c6-2edc14240e1b"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="457" y="0" width="64" height="20" uuid="a56bfa8b-6eee-410d-8b18-e5aaae4d930d"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
