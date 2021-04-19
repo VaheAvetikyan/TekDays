@@ -28,51 +28,41 @@
         <div class="message" role="status">${flash.message}</div>
     </g:if>
     <ol class="property-list sponsor">
-
         <g:if test="${sponsorInstance?.website}">
             <li class="fieldcontain">
                 <span id="website-label" class="property-label">
                     <g:message code="sponsor.website.label" default="Website"/></span>
-
                 <span class="property-value" aria-labelledby="website-label">
                     <g:fieldValue bean="${sponsorInstance}" field="website"/></span>
-
             </li>
         </g:if>
-
         <g:if test="${sponsorInstance?.description}">
             <li class="fieldcontain">
                 <span id="description-label" class="property-label">
                     <g:message code="sponsor.description.label" default="Description"/></span>
-
                 <span class="property-value" aria-labelledby="description-label">
                     <g:fieldValue bean="${sponsorInstance}" field="description"/></span>
-
             </li>
         </g:if>
-
         <g:if test="${sponsorInstance?.logo}">
             <li class="fieldcontain">
                 <span id="logo-label" class="property-label">
                     <g:message code="sponsor.logo.label" default="Logo"/></span>
-
+                <span class="property-value">
+                    <img class="logo-image" src="${createLink(controller: 'sponsor', action: 'fetchSponsorImage', params: ['name': sponsorInstance?.name])}"/></span>
             </li>
         </g:if>
-
         <g:if test="${sponsorInstance?.sponsorships}">
             <li class="fieldcontain">
                 <span id="sponsorships-label" class="property-label">
                     <g:message code="sponsor.sponsorships.label" default="Sponsorships"/></span>
-
                 <g:each in="${sponsorInstance.sponsorships}" var="s">
                     <span class="property-value" aria-labelledby="sponsorships-label">
                         <g:link controller="sponsorship" action="show" id="${s.id}">${s?.event?.encodeAsHTML()}</g:link>
                     </span>
                 </g:each>
-
             </li>
         </g:if>
-
     </ol>
     <g:form url="[resource: sponsorInstance, action: 'delete']" method="DELETE">
         <fieldset class="buttons">

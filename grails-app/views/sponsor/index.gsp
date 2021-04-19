@@ -48,7 +48,14 @@
                             id="${sponsorInstance.id}">${fieldValue(bean: sponsorInstance, field: "name")}</g:link></td>
                 <td>${fieldValue(bean: sponsorInstance, field: "website")}</td>
                 <td>${fieldValue(bean: sponsorInstance, field: "description")}</td>
-                <td>${fieldValue(bean: sponsorInstance, field: "logo")}</td>
+                <g:if test="${sponsorInstance?.logo}">
+                    <td><img class="logo-image"
+                             src="${createLink(controller: 'sponsor', action: 'fetchSponsorImage', params: ['name': sponsorInstance?.name])}"/>
+                    </td>
+                </g:if>
+                <g:else>
+                    <td></td>
+                </g:else>
                 <td><g:link controller="revisions" action="revisionSelect"
                             params="[type: sponsorInstance.getClass().name]"
                             id="${sponsorInstance?.id}">${sponsorInstance?.id}</g:link></td>

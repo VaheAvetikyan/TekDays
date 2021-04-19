@@ -286,3 +286,8 @@ p {
 a.bg-danger:focus, a.bg-danger:hover, button.bg-danger:focus, button.bg-danger:hover {
     background-color: #bd2130 !important
 }
+
+.logo-image {
+    padding: 5px;
+    width: 100px;
+}

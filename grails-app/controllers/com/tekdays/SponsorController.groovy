@@ -7,7 +7,7 @@ import static org.springframework.http.HttpStatus.*
 @Transactional(readOnly = true)
 class SponsorController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", delete: "DELETE"] // update: "PUT",
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -99,5 +99,13 @@ class SponsorController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    def fetchSponsorImage(){
+        def sponsor = Sponsor.findByName(params.name)
+        byte[] imageInByte = sponsor.logo
+        response.contentType = 'image/png' // or the appropriate image content type
+        response.outputStream << imageInByte
+        response.outputStream.flush()
     }
 }
