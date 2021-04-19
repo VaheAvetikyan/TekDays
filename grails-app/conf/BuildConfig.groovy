@@ -3,8 +3,8 @@ grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
 grails.project.work.dir = "target/work"
-grails.project.target.level = 1.6
-grails.project.source.level = 1.6
+grails.project.target.level = 1.8
+grails.project.source.level = 1.8
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
 grails.project.fork = [
@@ -54,7 +54,7 @@ grails.project.dependency.resolution = {
         // runtime 'org.mariadb.jdbc:mariadb-java-client:2.7.2'
         // test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
         runtime 'mysql:mysql-connector-java:5.1.47'
-        compile ("org.hibernate:hibernate-envers:4.3.11.Final") {
+        compile("org.hibernate:hibernate-envers:4.3.11.Final") {
             transitive = false
         }
         compile 'net.sf.jasperreports:jasperreports:5.6.0'
@@ -62,7 +62,7 @@ grails.project.dependency.resolution = {
 
     plugins {
         // plugins for the build system only
-        build ":tomcat:7.0.70" // or ":tomcat:8.0.22"
+        build ":tomcat:8.0.22" // or ":tomcat:7.0.70"
 
         // plugins for the compile step
         compile ":scaffolding:2.1.2"
