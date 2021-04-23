@@ -26,7 +26,7 @@ class RevisionsService {
         return revisionList
     }
 
-    def getRevisionResults(Class<?> className, Long id, List<Long> revId) {
+    def getRevisionResultsById(Class<?> className, Long id, List<Long> revId) {
         def revisionList = []
         AuditReaderFactory
                 .get(sessionFactory.currentSession)

@@ -21,6 +21,12 @@ class TekEventController {
         [properties: ["name", "city", "venue", "start date", "end date", "description", "organizer", "edit", "get revisions", "organizerId"]]
     }
 
+    def dataTablesRenderer() {
+        def propertiesToRender = ["name", "city", "venue", "startDate", "endDate", "description", "organizer", "id", "id", "organizerId"]
+        def entityName = TekEvent.class.simpleName
+        render datatablesSourceService.dataTablesSource(propertiesToRender, entityName, params)
+    }
+
     def show(Long id) {
         def tekEventInstance
         if (params.nickname) {
@@ -45,10 +51,6 @@ class TekEventController {
         event.addToVolunteers(session.user)
         event.save flush: true
         render "Thank you for Volunteering"
-//        render(contentType: 'text/json') {
-//            ['body': "Thank you for Volunteering",
-//             'data': "<a href='/TekDays/tekUser/show/${params.id}'>${session.user.fullName}</a>"]
-//        }
     }
 
     def create() {
@@ -154,11 +156,5 @@ class TekEventController {
             }
             '*' { render status: NOT_FOUND }
         }
-    }
-
-    def dataTablesRenderer() {
-        def propertiesToRender = ["name", "city", "venue", "startDate", "endDate", "description", "organizer", "id", "id", "organizerId"]
-        def entityName = 'TekEvent'
-        render datatablesSourceService.dataTablesSource(propertiesToRender, entityName, params)
     }
 }

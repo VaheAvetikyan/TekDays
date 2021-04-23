@@ -44,23 +44,7 @@
                                 return "";
                             }
                         },
-                        aTargets: [3]
-                    },
-                    {
-                        bSearchable: false,
-                        render: function (data) {
-                            if (data) {
-                                let d = new Date(data);
-                                let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
-                                let mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(d);
-                                let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
-                                let date = da + '-' + mo + '-' + ye
-                                return date;
-                            } else {
-                                return "";
-                            }
-                        },
-                        aTargets: [4]
+                        aTargets: [3, 4]
                     },
                     {
                          render: function (data, type, full, meta) {

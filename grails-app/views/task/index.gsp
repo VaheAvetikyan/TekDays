@@ -5,6 +5,102 @@
     <meta name="layout" content="main">
     <g:set var="entityName" value="${message(code: 'task.label', default: 'Task')}"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
+    <g:javascript>
+        $(document).ready(function () {
+            $('#dt').DataTable({
+                sScrollY: "75%",
+                sScrollX: "100%",
+                bProcessing: true,
+                bServerSide: true,
+                sAjaxSource: "${createLink(controller: entityName, action: 'dataTablesRenderer', params: [properties: properties])}",
+                bJQueryUI: false,
+                bAutoWidth: false,
+                sPaginationType: "full_numbers",
+                aLengthMenu: [[10, 25, 50, 100, 200], [10, 25, 50, 100, 200]],
+                iDisplayLength: 10,
+                bStateSave: true,
+                aoColumnDefs: [
+                    {
+                         render: function (data, type, full, meta) {
+                            if (full) {
+                                return '<a href="${createLink(action: 'show')}/' + full[7] + '" class="btn">' + data + '</a>';
+                            } else {
+                                return data;
+                            }
+                        },
+                        aTargets: [0]
+                    },
+                    {
+                         render: function (data, type, full, meta) {
+                            if (full[8]) {
+                                return '<a href="${createLink(controller: 'tekUser', action: 'show')}/' + full[8] + '" class="btn">' + data + '</a>';
+                            } else {
+                                return data;
+                            }
+                        },
+                        aTargets: [1]
+                    },
+                    {
+                        bSearchable: false,
+                        render: function (data) {
+                            if (data) {
+                                let d = new Date(data);
+                                let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+                                let mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(d);
+                                let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+                                let date = da + '-' + mo + '-' + ye
+                                return date;
+                            } else {
+                                return "";
+                            }
+                        },
+                        aTargets: [2]
+                    },
+                    {
+                         render: function (data, type, full, meta) {
+                            if (full[9]) {
+                                return '<a href="${createLink(controller: 'tekEvent', action: 'show')}/' + full[9] + '" class="btn">' + data + '</a>';
+                            } else {
+                                return data;
+                            }
+                        },
+                        aTargets: [5]
+                    },
+                     {
+                         bSearchable: false,
+                         bSortable: false,
+                        createdCell: function (td, cellData, rowData, row, col) {
+                            $(td).attr('style', 'text-align: center;');
+                        },
+                        render: function (data, type, full, meta) {
+                            if (data) {
+                                return '<a href="${createLink(action: 'edit')}/' + data + '" class="btn">Edit</a>';
+                            } else {
+                                return "";
+                            }
+                        },
+                        aTargets: [6]
+                    },
+                    {
+                        bSearchable: false,
+                        bSortable: false,
+                        render: function (data, type, full, meta) {
+                            if (data) {
+                                return '<a href="${createLink(controller: 'revisions', action: 'revisions')}/' + data + '?type=com.tekdays.Task" class="btn">Revisions</a>';
+                            } else {
+                                return "";
+                            }
+                        },
+                        aTargets: [7]
+                    },
+                    {
+                        visible: false,
+                        bSearchable: false,
+                        aTargets: [8, 9]
+                    }]
+            });
+        });
+    </g:javascript>
 </head>
 
 <body>
@@ -30,35 +126,23 @@
         <g:jasperCustom entityName="${entityName}"/>
     </div>
 
-    <table>
+    <table class="compact cell-border hover" id="dt">
         <thead>
         <tr>
-            <g:sortableColumn property="title" title="${message(code: 'task.title.label', default: 'Title')}"/>
-            <g:sortableColumn property="notes" title="${message(code: 'task.notes.label', default: 'Notes')}"/>
-            <th><g:message code="task.assignedTo.label" default="Assigned To"/></th>
-            <g:sortableColumn property="dueDate" title="${message(code: 'task.dueDate.label', default: 'Due Date')}"/>
-            <g:sortableColumn property="completed"
-                              title="${message(code: 'task.completed.label', default: 'Completed')}"/>
-            <th><g:message code="task.event.label" default="Event"/></th>
-            <th>Get Revisions</th>
+            <g:each in="${properties}" var="prop">
+                <th>${prop}</th>
+            </g:each>
         </tr>
         </thead>
         <tbody>
-        <g:each in="${taskInstanceList}" status="i" var="taskInstance">
-            <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                <td><g:link action="show"
-                            id="${taskInstance.id}">${fieldValue(bean: taskInstance, field: "title")}</g:link></td>
-                <td>${fieldValue(bean: taskInstance, field: "notes")}</td>
-                <td>${fieldValue(bean: taskInstance, field: "assignedTo")}</td>
-                <td><g:formatDate date="${taskInstance.dueDate}"/></td>
-                <td><g:formatBoolean boolean="${taskInstance.completed}"/></td>
-                <td>${fieldValue(bean: taskInstance, field: "event")}</td>
-                <td><g:link controller="revisions" action="revisionSelect"
-                            params="[type: taskInstance.getClass().name]"
-                            id="${taskInstance?.id}">${taskInstance?.id}</g:link></td>
-            </tr>
-        </g:each>
         </tbody>
+        <tfoot>
+        <tr>
+            <g:each in="${properties}" var="prop">
+                <th>${prop.capitalize()}</th>
+            </g:each>
+        </tr>
+        </tfoot>
     </table>
 
     <div class="pagination">

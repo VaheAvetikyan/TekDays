@@ -12,11 +12,18 @@ class TaskController {
     // Logger instance
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskController.class)
 
+    def datatablesSourceService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Task.list(params), model: [taskInstanceCount: Task.count()]
+    def index() {
+        [properties: ["Title", "Assigned to", "Due Date", "Completed", "Notes", "Event", "Edit", "Get Revisions", "assignedToId", "eventId"]]
+    }
+
+    def dataTablesRenderer() {
+        def propertiesToRender = ["title", "assignedTo", "dueDate", "completed", "notes", "event", "id", "id", "assignedToId", "eventId"]
+        def entityName = Task.class.simpleName
+        render datatablesSourceService.dataTablesSource(propertiesToRender, entityName, params)
     }
 
     def show(Task taskInstance) {

@@ -22,7 +22,7 @@ class RevisionsController {
 
     def compare() {
         Class cls = Class.forName(params.type)
-        def revisionList = revisionsService.getRevisionResults(cls, params.getLong('id'), (params.revId.collect{ Long.valueOf(it) } ))
+        def revisionList = revisionsService.getRevisionResultsById(cls, params.getLong('id'), (params.revId.collect{ Long.valueOf(it) } ))
         [revisionList: revisionList]
     }
 }
