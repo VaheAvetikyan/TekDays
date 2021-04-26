@@ -12,7 +12,7 @@
                 sScrollX: "100%",
                 bProcessing: true,
                 bServerSide: true,
-                sAjaxSource: "${createLink(controller: entityName, action: 'dataTablesRenderer', params: [properties: properties])}",
+                sAjaxSource: "${createLink(controller: 'Task', action: 'dataTablesRenderer', params: [properties: properties])}",
                 bJQueryUI: false,
                 bAutoWidth: false,
                 sPaginationType: "full_numbers",
@@ -74,7 +74,7 @@
                         },
                         render: function (data, type, full, meta) {
                             if (data) {
-                                return '<a href="${createLink(action: 'edit')}/' + data + '" class="btn">Edit</a>';
+                                return '<a href="${createLink(action: 'edit')}/' + data + '" class="btn">${message(code: "default.button.edit.label")}</a>';
                             } else {
                                 return "";
                             }
@@ -86,7 +86,7 @@
                         bSortable: false,
                         render: function (data, type, full, meta) {
                             if (data) {
-                                return '<a href="${createLink(controller: 'revisions', action: 'revisions')}/' + data + '?type=com.tekdays.Task" class="btn">Revisions</a>';
+                                return '<a href="${createLink(controller: 'revisions', action: 'revisions')}/' + data + '?type=com.tekdays.Task" class="btn">${message(code: "revisions.label")}</a>';
                             } else {
                                 return "";
                             }
@@ -123,7 +123,7 @@
     </g:if>
 
     <div class="page-body">
-        <g:jasperCustom entityName="${entityName}"/>
+        <g:jasperCustom entityName="Task"/>
     </div>
 
     <table class="compact cell-border hover" id="dt">
@@ -134,8 +134,7 @@
             </g:each>
         </tr>
         </thead>
-        <tbody>
-        </tbody>
+        <tbody></tbody>
         <tfoot>
         <tr>
             <g:each in="${properties}" var="prop">
@@ -144,10 +143,6 @@
         </tr>
         </tfoot>
     </table>
-
-    <div class="pagination">
-        <g:paginate total="${taskInstanceCount ?: 0}"/>
-    </div>
 </div>
 </body>
 </html>

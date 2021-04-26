@@ -9,9 +9,9 @@
     function countOfSelectedRevisions() {
         let _count = $("input[name='revId']:checked").length;
         if (_count > 1) {
-            return confirm("Count of selected revisions is " + _count + "\n\n${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}");
+            return confirm("${message(code: "revisions.alert.confirm.message")} " + _count + "\n\n${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}");
         } else {
-            alert('Count of selected revisions should be more than 1!');
+            alert('${message(code: "revisions.alert.message")}');
             return false;
         }
     }
@@ -37,7 +37,7 @@
         <g:if test="${revisionList}">
             <fieldset class="buttons">
                 <g:actionSubmit class="save" id="compare-diff" action="compare"
-                                onclick="return countOfSelectedRevisions();" value="Compare Differences"/>
+                                onclick="return countOfSelectedRevisions();" value="${message(code: 'revisions.compare.button.label')}"/>
             </fieldset>
         </g:if>
     </g:form>

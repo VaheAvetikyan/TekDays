@@ -40,7 +40,7 @@
             <g:sortableColumn property="description"
                               title="${message(code: 'sponsorship.description.label', default: 'Description')}"/>
             <g:sortableColumn property="notes" title="${message(code: 'sponsorship.notes.label', default: 'Notes')}"/>
-            <th>Get Revisions</th>
+            <th><g:message code="revisions.get.label"/></th>
         </tr>
         </thead>
         <tbody>

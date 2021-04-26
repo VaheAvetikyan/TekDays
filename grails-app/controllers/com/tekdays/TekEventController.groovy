@@ -18,7 +18,10 @@ class TekEventController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", revisions: "PUT"]
 
     def index() {
-        [properties: ["name", "city", "venue", "start date", "end date", "description", "organizer", "edit", "get revisions", "organizerId"]]
+        [properties: [message(code: 'tekEvent.name.label'), message(code: 'tekEvent.city.label'), message(code: 'tekEvent.venue.label'),
+                      message(code: 'tekEvent.startDate.label'), message(code: 'tekEvent.endDate.label'),
+                      message(code: 'tekEvent.description.label'), message(code: 'tekEvent.organizer.label'),
+                      message(code: 'default.button.edit.label'), message(code: "revisions.get.label"), "OrganizerId"]]
     }
 
     def dataTablesRenderer() {

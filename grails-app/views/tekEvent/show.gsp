@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'tekEvent.label', default: 'TekEvent')}"/>
+    <g:set var="entityName" value="${message(code: 'tekEvent.label')}"/>
     <g:javascript library="jquery"/>
     <title><g:message code="default.show.label" args="[entityName]"/></title>
 </head>
@@ -21,7 +21,8 @@
         <li><g:link class="create" action="create">
             <g:message code="default.new.label" args="[entityName]"/></g:link></li>
         <li><g:link class="list" controller="dashboard" action="dashboard"
-                    id="${tekEventInstance.id}">Event Dashboard</g:link></li>
+                    id="${tekEventInstance.id}">
+            <g:message code="tekEvent.Dashboard.label"/></g:link></li>
         <li><g:volunteerButton eventId="${tekEventInstance.id}"/></li>
     </ul>
 </div>
@@ -48,7 +49,7 @@
 
         <g:if test="${tekEventInstance?.city}">
             <li class="fieldcontain">
-                <span id="city-label" class="property-label">Location</span>
+                <span id="city-label" class="property-label"><g:message code="tekEvent.location.label"/></span>
 
                 <span class="property-value" aria-labelledby="city-label">
                     <g:fieldValue bean="${tekEventInstance}" field="venue"/>,

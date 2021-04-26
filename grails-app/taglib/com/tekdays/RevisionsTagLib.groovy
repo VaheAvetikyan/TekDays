@@ -8,7 +8,7 @@ class RevisionsTagLib {
             List revisionList = (List) attrs.revisionList
             createRevisionsTable(revisionList, attrs.showList, attrs.dif)
         } else {
-            out << "<h1>No Revisions for the entity</h1>"
+            out << "<h1>${message(code: 'revisions.noRevisions.label')}</h1>"
         }
     }
 
@@ -27,13 +27,13 @@ class RevisionsTagLib {
 
         out << "<table><thead><tr>"
         if (!dif) {
-            out << "<th>Compare</th>"
+            out << "<th>${message(code: 'revisions.compare.th.label')}</th>"
         }
-        out << "<th>Version</th>"
-        out << "<th>RevId</th>"
-        out << "<th>RevType</th>"
-        out << "<th>ChangedDate</th>"
-        out << "<th>User</th>"
+        out << "<th>${message(code: 'revisions.version.th.label')}</th>"
+        out << "<th>${message(code: 'revisions.revId.th.label')}</th>"
+        out << "<th>${message(code: 'revisions.revType.th.label')}</th>"
+        out << "<th>${message(code: 'revisions.changedDate.th.label')}</th>"
+        out << "<th>${message(code: 'revisions.user.th.label')}</th>"
         if (!showList) {
             keyList.each { key ->
                 out << "<th>${key}</th>"

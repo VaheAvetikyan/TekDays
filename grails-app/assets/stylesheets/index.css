@@ -55,6 +55,11 @@
     padding: 0.2em;
 }
 
+.homeCell span {
+    text-align: center;
+    display:inline-block
+}
+
 #welcome {
     width: auto;
 }

@@ -23,16 +23,19 @@ class TekDaysTagLib {
     def loginToggle = {
         out << "<div class='authenticationBar'>"
         if (request.getSession(false) && session.user) {
-            out << "<div class='loginToggle' id='loginWelcome'>Welcome "
+            out << "<div class='loginToggle' id='loginWelcome'>${message(code: 'default.login-logout.welcome')} "
             out << "<a href='${createLink(controller: 'tekUser', action: 'show', id: session.user.id)}'>"
             out << "${session.user}.</a>"
             out << "</div><div class='loginToggle' id='loginLogout'>"
             out << "<a href='${createLink(controller: 'tekUser', action: 'logout')}'>"
-            out << "Logout </a></div>"
+            out << "${message(code: 'default.logout.label')}</a></div>"
         } else {
             out << "<div id='loginLogout'>"
             out << "<a href='${createLink(controller: 'tekUser', action: 'login')}'>"
-            out << "Login </a></div>"
+            out << "${message(code: 'default.login.label')}</a>"
+            out << "<br>"
+            out << "<a href='${createLink(controller: 'tekUser', action: 'create')}'>"
+            out << "${message(code: 'default.register.label')}</a></div>"
         }
         out << "</div><br/>"
     }
@@ -41,7 +44,7 @@ class TekDaysTagLib {
         if (request.getSession(false) && session.user) {
             def events = TekEvent.findAllByOrganizer(session.user)
             if (events) {
-                return eventListLinkBuilder(events, "is organizing")
+                return eventListLinkBuilder(events, message(code: 'default.homepage.isOrganizing'))
             }
         }
     }
@@ -53,7 +56,7 @@ class TekDaysTagLib {
                     eq('id', session.user?.id)
                 }
             }
-            return eventListLinkBuilder(events, "volunteered for")
+            return eventListLinkBuilder(events, message(code: 'default.homepage.volunteered'))
         }
     }
 
@@ -77,7 +80,7 @@ class TekDaysTagLib {
             if (event && !event.volunteers.contains(user)){
                 out << "<span id='volunteerSpan' class='menuButton'>"
                 out << "<button id='volunteerButton' type='button'>"
-                out << "Volunteer For This Event"
+                out << "${message(code:'tekEvent.volunteerFor')}"
                 out << "</button>"
                 out << "</span>"
             }

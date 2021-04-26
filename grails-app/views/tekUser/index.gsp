@@ -35,7 +35,7 @@
             <g:sortableColumn property="email" title="${message(code: 'tekUser.email.label', default: 'Email')}"/>
             <g:sortableColumn property="website" title="${message(code: 'tekUser.website.label', default: 'Website')}"/>
             <g:sortableColumn property="bio" title="${message(code: 'tekUser.bio.label', default: 'Bio')}"/>
-            <th>Get Revisions</th>
+            <th><g:message code="revisions.get.label"/></th>
         </tr>
         </thead>
         <tbody>

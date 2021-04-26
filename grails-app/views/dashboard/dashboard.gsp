@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>TekDays - Dashboard</title>
+    <title>TekDays - <g:message code="tekEvent.Dashboard.label"/></title>
     <meta name="layout" content="main"/>
 </head>
 
@@ -9,9 +9,12 @@
 <div class="nav" role="navigation">
     <ul>
         <li><a class="home" href="${createLink(uri: '/')}">Home</a></li>
-        <li><g:link class="create" controller="task" action="create">Create Task</g:link></li>
-        <li><g:link class="create" controller="sponsorship" action="create">Add Sponsor</g:link></li>
-        <li><g:link class="list" controller="sponsor" action="index">All Sponsors</g:link></li>
+        <li><g:link class="create" controller="task" action="create">
+            <g:message code="default.create.label" args="[message(code: 'task.label')]"/></g:link></li>
+        <li><g:link class="create" controller="sponsorship" action="create">
+            <g:message code="default.add.label" args="[message(code: 'sponsor.label')]"/></g:link></li>
+        <li><g:link class="list" controller="sponsor" action="index">
+            <g:message code="default.list.label" args="[message(code: 'sponsor.label')]"/></g:link></li>
     </ul>
 </div>
 

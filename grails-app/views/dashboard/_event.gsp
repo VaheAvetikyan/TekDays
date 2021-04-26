@@ -5,21 +5,16 @@
 </span>
 <table>
     <tr>
-        <td>
-            Start Date: <g:formatDate format="MMM/dd/yyyy" date="${event.startDate}"/>
-        </td>
+        <td><g:message code="tekEvent.startDate.label"/>:
+            <g:formatDate format="MMM/dd/yyyy" date="${event.startDate}"/></td>
         <td>
             <g:if test="${event.endDate}">
-                End Date: <g:formatDate format="MMM/dd/yyyy" date="${event.endDate}"/>
+                <g:message code="tekEvent.endDate.label"/>: <g:formatDate format="MMM/dd/yyyy" date="${event.endDate}"/>
             </g:if>
         </td>
     </tr>
     <tr>
-        <td>
-            Venue: ${event.venue}
-        </td>
-        <td>
-            Number of potential attendees: ${event.respondents.size()}
-        </td>
+        <td><g:message code="tekEvent.venue.label"/>: ${event.venue}</td>
+        <td><g:message code="tekEvent.respondents.label"/>: ${event.respondents.size()}</td>
     </tr>
 </table>

@@ -17,7 +17,9 @@ class TaskController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index() {
-        [properties: ["Title", "Assigned to", "Due Date", "Completed", "Notes", "Event", "Edit", "Get Revisions", "assignedToId", "eventId"]]
+        [properties: [message(code: 'task.title.label'), message(code: 'task.assignedTo.label'), message(code: 'task.dueDate.label'),
+                      message(code: 'task.completed.label'), message(code: 'task.notes.label'), message(code: 'task.event.label'),
+                      message(code: 'default.button.edit.label'), message(code: "revisions.get.label"), "assignedToId", "eventId"]]
     }
 
     def dataTablesRenderer() {

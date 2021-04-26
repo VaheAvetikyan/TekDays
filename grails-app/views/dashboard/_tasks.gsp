@@ -1,30 +1,26 @@
-<h3>Things to do</h3>
+<h3><g:message code="tekEvent.tasks.label"/></h3>
 <table>
     <thead>
     <tr>
-        <th>Task Title</th>
-        <th>Due Date</th>
-        <th>Assigned To</th>
+        <th><g:message code="task.title.label"/></th>
+        <th><g:message code="task.dueDate.label"/></th>
+        <th><g:message code="task.assignedTo.label"/></th>
     </tr>
     </thead>
     <g:each in="${tasks}" var="task">
         <tr>
-            <td>${task.title}</td>
-            <td>
-                <g:formatDate format="MM/dd/yyyy" date="${task.dueDate}"/>
-            </td>
-            <td>
-                ${task.assignedTo}
-            </td>
+            <td><g:link controller="task" action="show" id="${task.id}">${task.title}</g:link></td>
+            <td><g:formatDate format="MM/dd/yyyy" date="${task.dueDate}"/></td>
+            <td><g:link controller="tekUser" action="show" id="${task.assignedToId}">${task.assignedTo}</g:link></td>
         </tr>
     </g:each>
 </table>
 
 <g:if test="${event.tasks.size() > 0}">
     <g:link controller="task" action="index" id="${event.id}">
-        <p>View all ${event.tasks.size()} tasks for this event.</p>
+        <p><g:message code="task.view-all.label" args="${event.tasks.size()}"/></p>
     </g:link>
 </g:if>
 <g:else>
-    <p>No tasks for this event</p>
+    <p><g:message code="task.No-tasks.label"/></p>
 </g:else>

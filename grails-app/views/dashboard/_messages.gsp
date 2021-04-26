@@ -1,10 +1,10 @@
-<h3>Forum Messages</h3>
+<h3><g:message code="tekMessage.ForumMessages.label"/></h3>
 <table>
     <thead>
     <tr>
-        <th>Author</th>
-        <th>Subject</th>
-        <th>Content</th>
+        <th><g:message code="tekMessage.author.label"/></th>
+        <th><g:message code="tekMessage.subject.label"/></th>
+        <th><g:message code="tekMessage.content.label"/></th>
     </tr>
     </thead>
     <g:each in="${messages}" var="msg">
@@ -25,5 +25,5 @@
     </g:each>
 </table>
 <g:link controller="tekMessage" action="index" id="${event.id}">
-    <p>View threaded messages for this event.</p>
+    <p><g:message code="tekMessage.View-threaded-messages.label"/></p>
 </g:link>

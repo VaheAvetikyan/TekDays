@@ -1,11 +1,11 @@
 <div id="show-tekMessage" class="content scaffold-show" role="main">
     <br>
 
-    <h3>Message Details</h3>
+    <h3><g:message code="tekMessage.details.label"/></h3>
     <ol class="property-list tekMessage">
         <g:if test="${tekMessageInstance?.parent}">
             <li class="fieldcontain">
-                <span class="property-label">In reply to</span>
+                <span class="property-label"><g:message code="tekMessage.in-reply-to.label"/></span>
                 <span class="property-value" aria-labelledby="subject-label">
                     <g:fieldValue bean="${tekMessageInstance?.parent}" field="author"/></span>
             </li>
@@ -41,7 +41,7 @@
     <g:form>
         <fieldset class="buttons">
             <g:link class="create" action="reply"
-                    resource="${tekMessageInstance}">Reply</g:link>
+                    resource="${tekMessageInstance}"><g:message code="tekMessage.reply.label"/></g:link>
         </fieldset>
     </g:form>
 </div>

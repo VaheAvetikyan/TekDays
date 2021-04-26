@@ -25,7 +25,7 @@
 <div id="list-tekMessage" class="content scaffold-list" role="main">
 </div>
 
-<h1 id="title">${event?.name} - Forum Messages</h1>
+<h1 id="title">${event?.name} - <g:message code="tekMessage.ForumMessages.label"/></h1>
 
 <div id="messageList">
     <g:messageThread messages="${tekMessageInstanceList}"/>

@@ -1,10 +1,10 @@
-<h3>Volunteers</h3>
+<h3><g:message code="tekEvent.volunteers.label"/></h3>
 <table>
     <thead>
     <tr>
-        <th>Name</th>
-        <th>Email Address</th>
-        <th>Web Site</th>
+        <th><g:message code="tekUser.fullName.label"/></th>
+        <th><g:message code="tekUser.email.label"/></th>
+        <th><g:message code="tekUser.website.label"/></th>
     </tr>
     </thead>
     <g:each in="${volunteers}" var="volunteer">

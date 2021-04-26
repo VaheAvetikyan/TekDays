@@ -12,7 +12,7 @@
                 sScrollX: "100%",
                 bProcessing: true,
                 bServerSide: true,
-                sAjaxSource: "${createLink(controller: entityName, action: 'dataTablesRenderer', params: [properties: properties])}",
+                sAjaxSource: "${createLink(controller: 'TekEvent', action: 'dataTablesRenderer', params: [properties: properties])}",
                 bJQueryUI: false,
                 bAutoWidth: false,
                 sPaginationType: "full_numbers",
@@ -64,7 +64,7 @@
                         },
                         render: function (data, type, full, meta) {
                             if (data) {
-                                return '<a href="${createLink(action: 'edit')}/' + data + '" class="btn">Edit</a>';
+                                return '<a href="${createLink(action: 'edit')}/' + data + '" class="btn">${message(code: "default.button.edit.label")}</a>';
                             } else {
                                 return "";
                             }
@@ -76,7 +76,7 @@
                         bSortable: false,
                         render: function (data, type, full, meta) {
                             if (data) {
-                                return '<a href="${createLink(controller: 'revisions', action: 'revisions')}/' + data + '?type=com.tekdays.TekEvent" class="btn">Revisions</a>';
+                                return '<a href="${createLink(controller: 'revisions', action: 'revisions')}/' + data + '?type=com.tekdays.TekEvent" class="btn">${message(code: "revisions.label")}</a>';
                             } else {
                                 return "";
                             }
@@ -110,7 +110,7 @@
     <h1><g:message code="default.list.label" args="[entityName]"/></h1>
 
     <div class="page-body">
-        <g:jasperCustom entityName="${entityName}"/>
+        <g:jasperCustom entityName="TekEvent"/>
     </div>
 
     <g:if test="${flash.message}">
@@ -120,7 +120,7 @@
         <thead>
         <tr>
             <g:each in="${properties}" var="prop">
-                <th>${prop.capitalize()}</th>
+                <th>${prop}</th>
             </g:each>
         </tr>
         </thead>
@@ -128,7 +128,7 @@
         <tfoot>
         <tr>
             <g:each in="${properties}" var="prop">
-                <th>${prop.capitalize()}</th>
+                <th>${prop}</th>
             </g:each>
         </tr>
         </tfoot>

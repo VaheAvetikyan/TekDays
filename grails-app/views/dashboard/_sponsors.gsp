@@ -1,10 +1,10 @@
-<h3>Sponsors</h3>
+<h3><g:message code="sponsor.sponsorships.label"/></h3>
 <table>
     <thead>
     <tr>
-        <th>Name</th>
-        <th>Web Site</th>
-        <th>Contribution</th>
+        <th><g:message code="sponsor.name.label"/></th>
+        <th><g:message code="sponsor.website.label"/></th>
+        <th><g:message code="sponsorship.contributionType.label"/></th>
     </tr>
     </thead>
     <g:each in="${sponsorships}" var="s">
