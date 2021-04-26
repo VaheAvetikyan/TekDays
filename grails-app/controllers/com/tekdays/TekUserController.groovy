@@ -76,7 +76,7 @@ class TekUserController {
         }
     }
 
-    def create() {
+    def register() {
         respond new TekUser(params)
     }
 
@@ -88,7 +88,7 @@ class TekUserController {
         }
 
         if (tekUserInstance.hasErrors()) {
-            respond tekUserInstance.errors, view: 'create'
+            respond tekUserInstance.errors, view: 'register'
             return
         }
 

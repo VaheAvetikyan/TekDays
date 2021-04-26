@@ -34,7 +34,7 @@ class TekDaysTagLib {
             out << "<a href='${createLink(controller: 'tekUser', action: 'login')}'>"
             out << "${message(code: 'default.login.label')}</a>"
             out << "<br>"
-            out << "<a href='${createLink(controller: 'tekUser', action: 'create')}'>"
+            out << "<a href='${createLink(controller: 'tekUser', action: 'register')}'>"
             out << "${message(code: 'default.register.label')}</a></div>"
         }
         out << "</div><br/>"
