@@ -21,12 +21,11 @@ class TekDaysTagLib {
     }
 
     def loginToggle = {
-        out << "<div class='authenticationBar'>"
+        out << "<div>"
         if (request.getSession(false) && session.user) {
-            out << "<div class='loginToggle' id='loginWelcome'>${message(code: 'default.login-logout.welcome')} "
             out << "<a href='${createLink(controller: 'tekUser', action: 'show', id: session.user.id)}'>"
-            out << "${session.user}.</a>"
-            out << "</div><div class='loginToggle' id='loginLogout'>"
+            out << "${message(code: 'default.login-logout.welcome')} ${session.user}</a>"
+            out << "</div><div id='loginLogout'>"
             out << "<a href='${createLink(controller: 'tekUser', action: 'logout')}'>"
             out << "${message(code: 'default.logout.label')}</a></div>"
         } else {
@@ -37,7 +36,6 @@ class TekDaysTagLib {
             out << "<a href='${createLink(controller: 'tekUser', action: 'register')}'>"
             out << "${message(code: 'default.register.label')}</a></div>"
         }
-        out << "</div><br/>"
     }
 
     def organizerEvents = {
@@ -73,14 +71,14 @@ class TekDaysTagLib {
         out << "</div>"
     }
 
-    def volunteerButton = {attrs ->
-        if (request.getSession(false) && session.user){
+    def volunteerButton = { attrs ->
+        if (request.getSession(false) && session.user) {
             def user = session.user.merge()
             def event = TekEvent.get(attrs.eventId)
-            if (event && !event.volunteers.contains(user)){
+            if (event && !event.volunteers.contains(user)) {
                 out << "<span id='volunteerSpan' class='menuButton'>"
                 out << "<button id='volunteerButton' type='button'>"
-                out << "${message(code:'tekEvent.volunteerFor')}"
+                out << "${message(code: 'tekEvent.volunteerFor')}"
                 out << "</button>"
                 out << "</span>"
             }

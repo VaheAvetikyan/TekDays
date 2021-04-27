@@ -19,10 +19,23 @@
 
 <body>
 <div id="logo" role="banner">
-    <a href="${createLink(uri: '/')}">
-        <img src="${resource(dir: 'images', file: 'mount.png')}" alt="TekDays"/></a>
-    <g:loginToggle/>
+    <div class="navbar">
+        <a href="${createLink(uri: '/')}">
+            <img src="${resource(dir: 'images', file: 'mount.png')}" alt="TekDays"/></a>
+        <g:loginToggle/>
+        <div class="dropdown">
+            <button class="dropbtn"><g:message code="language.languages"/></button>
+
+            <div class="dropdown-content">
+                <a href="${createLink(controller: controllerName, action: actionName, id: params.id)}?type=${params.type}&lang=hy">
+                    <g:message code="language.hy"/></a>
+                <a href="${createLink(controller: controllerName, action: actionName, id: params.id)}?type=${params.type}&lang=en">
+                    <g:message code="language.en"/></a>
+            </div>
+        </div>
+    </div>
 </div>
+
 <g:layoutBody/>
 <div class="footer" role="contentinfo"></div>
 
