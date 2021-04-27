@@ -47,10 +47,6 @@ body {
 	        box-shadow: 0 0 0.3em #255b17;
 }
 
-#grailsLogo {
-	background-color: #abbf78;
-}
-
 /* replace with .no-boxshadow body if you have modernizr available */
 .ie6 body,
 .ie7 body,
@@ -70,7 +66,7 @@ a:link, a:visited {
 }
 
 a:hover, a:active {
-    text-decoration: underline;
+    text-decoration: none;
     color: dodgerblue;
     outline: none; /* prevents outline in webkit on active links but retains it for tab focus */
 }
@@ -111,8 +107,8 @@ img {
 }
 
 .footer {
-	background: #abbf78;
-	color: #000;
+	background: #333333;
+	color: #dddddd;
 	clear: both;
 	font-size: 0.8em;
 	margin-top: 1.5em;

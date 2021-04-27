@@ -66,8 +66,9 @@
 
 .page-body {
     text-align: center;
-    background-color: #eef;
-    border: .25em solid #eff;
+    background-color: #333333;
+    color: #4e8d38;
+    border: .1em solid #4e8d38;
     margin: 1em 1em 1em 1em;
     width: 40%;
     padding: 1em;
@@ -77,6 +78,7 @@
 }
 
 .page-body h1 {
+    color: #7ed26c;
     text-align: center;
     font-size: 1.4em;
     margin: 0 0 0.3em;
@@ -94,12 +96,16 @@
     margin-right: 0.5em;
     margin-bottom: 0.2em;
     padding: 0.5em;
-    border: 0.02em solid #ccc;
+    border: 0.02em solid #4e8d38;
     border-radius: 0.5em;
 }
 
 .page-body ul li:hover {
-    background-color: #ccc;
+    background-color: #4e8d38;
+}
+
+.page-body ul li:hover a {
+    color: white;
 }
 
 .page-body ul li a {
@@ -275,14 +281,13 @@ a.bg-danger:focus, a.bg-danger:hover, button.bg-danger:focus, button.bg-danger:h
 .navbar {
     overflow: hidden;
     background-color: #333;
-    font-family: Arial;
 }
 
 /* Links inside the navbar */
 .navbar a {
     float: left;
     font-size: 16px;
-    color: white;
+    color: #7ed26c;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -299,7 +304,7 @@ a.bg-danger:focus, a.bg-danger:hover, button.bg-danger:focus, button.bg-danger:h
     font-size: 16px;
     border: none;
     outline: none;
-    color: white;
+    color: #92943b;
     padding: 14px 16px;
     background-color: inherit;
     font-family: inherit; /* Important for vertical align on mobile phones */
@@ -308,7 +313,8 @@ a.bg-danger:focus, a.bg-danger:hover, button.bg-danger:focus, button.bg-danger:h
 
 /* Add a red background color to navbar links on hover */
 .navbar a:hover, .dropdown:hover .dropbtn {
-    background-color: red;
+    background-color: #4e7c37;
+    color: white;
 }
 
 /* Dropdown content (hidden by default) */
@@ -333,7 +339,7 @@ a.bg-danger:focus, a.bg-danger:hover, button.bg-danger:focus, button.bg-danger:h
 
 /* Add a grey background color to dropdown links on hover */
 .dropdown-content a:hover {
-    background-color: #ddd;
+    background-color: #666666;
 }
 
 /* Show the dropdown menu on hover */
