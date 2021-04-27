@@ -19,11 +19,11 @@ class DashboardController {
                         messages    : messages,
                         sponsorships: sponsorships]
             } else {
-                flash.message = "Access to dashboard for ${event.name} denied."
+                flash.message = message(code: "dashboard.access.denied.label", args: [event.name])
                 redirect controller: 'tekEvent', action: 'index'
             }
         } else {
-            flash.message = "No event was found with an id of ${params.id}"
+            flash.message = message(code: "dashboard.noEventFound.label", args: [params.id])
             redirect controller: 'tekEvent', action: 'index'
         }
     }
