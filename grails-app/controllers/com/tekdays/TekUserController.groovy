@@ -1,5 +1,6 @@
 package com.tekdays
 
+import grails.converters.JSON
 import grails.transaction.Transactional
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -156,6 +157,16 @@ class TekUserController {
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NOT_FOUND }
+        }
+    }
+
+    def apiData() {
+        def data = TekUser.get(params.id)
+        if (data) {
+            render data as JSON
+        } else {
+            data = TekUser.list()
+            render data as JSON
         }
     }
 }

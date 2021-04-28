@@ -1,5 +1,6 @@
 package com.tekdays
 
+import grails.converters.JSON
 import grails.transaction.Transactional
 
 import static org.springframework.http.HttpStatus.*
@@ -107,5 +108,15 @@ class SponsorController {
         response.contentType = 'image/png' // or the appropriate image content type
         response.outputStream << imageInByte
         response.outputStream.flush()
+    }
+
+    def apiData() {
+        def data = Sponsor.get(params.id)
+        if (data) {
+            render data as JSON
+        } else {
+            data = Sponsor.list()
+            render data as JSON
+        }
     }
 }

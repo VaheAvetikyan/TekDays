@@ -1,5 +1,6 @@
 package com.tekdays
 
+import grails.converters.JSON
 import grails.transaction.Transactional
 
 import static org.springframework.http.HttpStatus.*
@@ -98,6 +99,16 @@ class SponsorshipController {
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }
+        }
+    }
+
+    def apiData() {
+        def data = Sponsorship.get(params.id)
+        if (data) {
+            render data as JSON
+        } else {
+            data = Sponsorship.list()
+            render data as JSON
         }
     }
 }

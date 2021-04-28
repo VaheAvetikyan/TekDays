@@ -1,23 +1,27 @@
 class UrlMappings {
 
-	static mappings = {
-        "/$controller/$action?/$id?(.$format)?"{
+    static mappings = {
+        "/$controller/$action?/$id?" {
             constraints {
                 // apply constraints here
             }
         }
 
-        "/"(view:"/index")
-        "500"(view:'/error')
+        "/"(view: "/index")
+        "500"(view: '/error')
 
-        "/events/$nickname"{
+        "/api/$controller?/$id?" {
+            action = "apiData"
+        }
+
+        "/events/$nickname" {
             controller = "tekEvent"
             action = "show"
         }
 
-        "/users/$userName"{
+        "/users/$userName" {
             controller = "tekUser"
             action = "show"
         }
-	}
+    }
 }

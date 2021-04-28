@@ -1,6 +1,8 @@
 package com.tekdays
 
+import grails.converters.JSON
 import grails.transaction.Transactional
+import groovy.json.JsonBuilder
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -158,6 +160,24 @@ class TekEventController {
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NOT_FOUND }
+        }
+    }
+
+    def apiData() {
+        def data = TekEvent.get(params.id)
+        if (data) {
+            def builder = new JsonBuilder()
+            def root = builder.event {
+                city data.city
+                name data.name
+                volunteers data.volunteers.each {
+                    it.fullName
+                }
+            }
+            render root
+        } else {
+            data = TekEvent.list()
+            render data as JSON
         }
     }
 }
