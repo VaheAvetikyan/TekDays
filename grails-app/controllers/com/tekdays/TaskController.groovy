@@ -82,7 +82,7 @@ class TaskController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Task.label', default: 'Task'), taskInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'task.label', default: 'Task'), taskInstance.id])
                 redirect taskInstance
             }
             '*' { respond taskInstance, [status: OK] }
@@ -101,7 +101,7 @@ class TaskController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Task.label', default: 'Task'), taskInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'task.label', default: 'Task'), taskInstance.id])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NO_CONTENT }

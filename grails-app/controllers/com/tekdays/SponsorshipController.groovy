@@ -67,7 +67,7 @@ class SponsorshipController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Sponsorship.label', default: 'Sponsorship'), sponsorshipInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'sponsorship.label', default: 'Sponsorship'), sponsorshipInstance.id])
                 redirect sponsorshipInstance
             }
             '*' { respond sponsorshipInstance, [status: OK] }
@@ -86,7 +86,7 @@ class SponsorshipController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Sponsorship.label', default: 'Sponsorship'), sponsorshipInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'sponsorship.label', default: 'Sponsorship'), sponsorshipInstance.id])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NO_CONTENT }
