@@ -1,6 +1,7 @@
 package com.tekdays
 
 import grails.converters.JSON
+import grails.plugin.mail.MailService
 import grails.rest.RestfulController
 import grails.transaction.Transactional
 import groovy.json.JsonBuilder
@@ -17,6 +18,7 @@ class TekEventController extends RestfulController {
 
     def taskService
     def datatablesSourceService
+    MailService mailService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", revisions: "PUT", apiData: "GET"]
 
@@ -78,7 +80,15 @@ class TekEventController extends RestfulController {
         tekEventInstance.save flush: true
 
         // Logger for event creation
-        LOGGER.info("Event with name: ${tekEventInstance?.name}")
+        LOGGER.info("Event with name: ${tekEventInstance?.name} created")
+
+        mailService.sendMail {
+            to session.user.email
+            subject message(code: 'email.tekEvent.create.subject', args: [tekEventInstance.name, tekEventInstance.city, tekEventInstance.venue])
+            body message(code: 'email.tekEvent.create.body', args: [session.user.fullName, tekEventInstance.name, tekEventInstance.city,
+                                                                    tekEventInstance.venue, tekEventInstance.startDate,
+                                                                    tekEventInstance.endDate, tekEventInstance.organizer.fullName])
+        }
 
         taskService.addDefaultTasks(tekEventInstance)
 
