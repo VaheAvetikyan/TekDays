@@ -1,6 +1,7 @@
 package com.tekdays
 
 import grails.converters.JSON
+import grails.rest.RestfulController
 import grails.transaction.Transactional
 import groovy.json.JsonBuilder
 import org.slf4j.Logger
@@ -9,7 +10,7 @@ import org.slf4j.LoggerFactory
 import static org.springframework.http.HttpStatus.*
 
 @Transactional(readOnly = true)
-class TekEventController {
+class TekEventController extends RestfulController {
 
     // Logger instance
     private static final Logger LOGGER = LoggerFactory.getLogger(TekEventController.class)
@@ -17,7 +18,7 @@ class TekEventController {
     def taskService
     def datatablesSourceService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", revisions: "PUT"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", revisions: "PUT", apiData: "GET"]
 
     def index() {
         [properties: [message(code: 'tekEvent.name.label'), message(code: 'tekEvent.city.label'), message(code: 'tekEvent.venue.label'),
@@ -168,16 +169,36 @@ class TekEventController {
         if (data) {
             def builder = new JsonBuilder()
             def root = builder.event {
-                city data.city
                 name data.name
-                volunteers data.volunteers.each {
-                    it.fullName
+                city data.city
+                venue data.venue
+                startDate data.startDate.format("yyyy-MMM-dd")
+                endDate data.endDate.format("yyyy-MMM-dd")
+                description data.description
+                organizer data.organizer.fullName
+                volunteers data.volunteers.collect {
+                    [name: it.fullName]
                 }
             }
-            render root
+            render root as JSON
         } else {
             data = TekEvent.list()
-            render data as JSON
+            def builder = new JsonBuilder()
+            def root = builder.events {
+                event data.collect {
+                    [name       : it.name,
+                     city       : it.city,
+                     venue      : it.venue,
+                     startDate  : it.startDate.format("yyyy-MMM-dd"),
+                     endDate    : it.endDate.format("yyyy-MMM-dd"),
+                     description: it.description,
+                     organizer  : it.organizer.fullName,
+                     volunteers : it.volunteers.collect { volunteer ->
+                         [name: volunteer.fullName]
+                     }]
+                }
+            }
+            render root as JSON
         }
     }
 }

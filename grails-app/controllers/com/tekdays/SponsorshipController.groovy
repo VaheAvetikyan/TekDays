@@ -2,17 +2,18 @@ package com.tekdays
 
 import grails.converters.JSON
 import grails.transaction.Transactional
+import groovy.json.JsonBuilder
 
 import static org.springframework.http.HttpStatus.*
 
 @Transactional(readOnly = true)
 class SponsorshipController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", apiData: "GET"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Sponsorship.list(params), model:[sponsorshipInstanceCount: Sponsorship.count()]
+        respond Sponsorship.list(params), model: [sponsorshipInstanceCount: Sponsorship.count()]
     }
 
     def show(Sponsorship sponsorshipInstance) {
@@ -31,11 +32,11 @@ class SponsorshipController {
         }
 
         if (sponsorshipInstance.hasErrors()) {
-            respond sponsorshipInstance.errors, view:'create'
+            respond sponsorshipInstance.errors, view: 'create'
             return
         }
 
-        sponsorshipInstance.save flush:true
+        sponsorshipInstance.save flush: true
 
         request.withFormat {
             form multipartForm {
@@ -58,18 +59,18 @@ class SponsorshipController {
         }
 
         if (sponsorshipInstance.hasErrors()) {
-            respond sponsorshipInstance.errors, view:'edit'
+            respond sponsorshipInstance.errors, view: 'edit'
             return
         }
 
-        sponsorshipInstance.save flush:true
+        sponsorshipInstance.save flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Sponsorship.label', default: 'Sponsorship'), sponsorshipInstance.id])
                 redirect sponsorshipInstance
             }
-            '*'{ respond sponsorshipInstance, [status: OK] }
+            '*' { respond sponsorshipInstance, [status: OK] }
         }
     }
 
@@ -81,14 +82,14 @@ class SponsorshipController {
             return
         }
 
-        sponsorshipInstance.delete flush:true
+        sponsorshipInstance.delete flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'Sponsorship.label', default: 'Sponsorship'), sponsorshipInstance.id])
-                redirect action:"index", method:"GET"
+                redirect action: "index", method: "GET"
             }
-            '*'{ render status: NO_CONTENT }
+            '*' { render status: NO_CONTENT }
         }
     }
 
@@ -98,17 +99,35 @@ class SponsorshipController {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'sponsorship.label', default: 'Sponsorship'), params.id])
                 redirect action: "index", method: "GET"
             }
-            '*'{ render status: NOT_FOUND }
+            '*' { render status: NOT_FOUND }
         }
     }
 
     def apiData() {
         def data = Sponsorship.get(params.id)
         if (data) {
-            render data as JSON
+            def builder = new JsonBuilder()
+            def root = builder.sponsorship {
+                event data.event.name
+                sponsor data.sponsor.name
+                contributionType data.contributionType
+                description data.description
+                notes data.notes
+            }
+            render root as JSON
         } else {
             data = Sponsorship.list()
-            render data as JSON
+            def builder = new JsonBuilder()
+            def root = builder.sponsorships {
+                sponsorship data.collect {
+                    [event           : it.event.name,
+                     sponsor         : it.sponsor.name,
+                     contributionType: it.contributionType,
+                     description     : it.description,
+                     notes           : it.notes]
+                }
+            }
+            render root as JSON
         }
     }
 }

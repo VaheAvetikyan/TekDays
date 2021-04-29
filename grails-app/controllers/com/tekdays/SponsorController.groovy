@@ -2,17 +2,18 @@ package com.tekdays
 
 import grails.converters.JSON
 import grails.transaction.Transactional
+import groovy.json.JsonBuilder
 
 import static org.springframework.http.HttpStatus.*
 
 @Transactional(readOnly = true)
 class SponsorController {
 
-    static allowedMethods = [save: "POST", delete: "DELETE"] // update: "PUT",
+    static allowedMethods = [save: "POST", delete: "DELETE", apiData: "GET"] // update: "PUT",
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Sponsor.list(params), model:[sponsorInstanceCount: Sponsor.count()]
+        respond Sponsor.list(params), model: [sponsorInstanceCount: Sponsor.count()]
     }
 
     def show(Sponsor sponsorInstance) {
@@ -31,11 +32,11 @@ class SponsorController {
         }
 
         if (sponsorInstance.hasErrors()) {
-            respond sponsorInstance.errors, view:'create'
+            respond sponsorInstance.errors, view: 'create'
             return
         }
 
-        sponsorInstance.save flush:true
+        sponsorInstance.save flush: true
 
         request.withFormat {
             form multipartForm {
@@ -58,18 +59,18 @@ class SponsorController {
         }
 
         if (sponsorInstance.hasErrors()) {
-            respond sponsorInstance.errors, view:'edit'
+            respond sponsorInstance.errors, view: 'edit'
             return
         }
 
-        sponsorInstance.save flush:true
+        sponsorInstance.save flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Sponsor.label', default: 'Sponsor'), sponsorInstance.id])
                 redirect sponsorInstance
             }
-            '*'{ respond sponsorInstance, [status: OK] }
+            '*' { respond sponsorInstance, [status: OK] }
         }
     }
 
@@ -81,14 +82,14 @@ class SponsorController {
             return
         }
 
-        sponsorInstance.delete flush:true
+        sponsorInstance.delete flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'Sponsor.label', default: 'Sponsor'), sponsorInstance.id])
-                redirect action:"index", method:"GET"
+                redirect action: "index", method: "GET"
             }
-            '*'{ render status: NO_CONTENT }
+            '*' { render status: NO_CONTENT }
         }
     }
 
@@ -98,11 +99,11 @@ class SponsorController {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'sponsor.label', default: 'Sponsor'), params.id])
                 redirect action: "index", method: "GET"
             }
-            '*'{ render status: NOT_FOUND }
+            '*' { render status: NOT_FOUND }
         }
     }
 
-    def fetchSponsorImage(){
+    def fetchSponsorImage() {
         def sponsor = Sponsor.findByName(params.name)
         byte[] imageInByte = sponsor.logo
         response.contentType = 'image/png' // or the appropriate image content type
@@ -113,10 +114,24 @@ class SponsorController {
     def apiData() {
         def data = Sponsor.get(params.id)
         if (data) {
-            render data as JSON
+            def builder = new JsonBuilder()
+            def root = builder.sponsor {
+                name data.name
+                website data.website
+                description data.description
+            }
+            render root as JSON
         } else {
             data = Sponsor.list()
-            render data as JSON
+            def jsonBuilder = new JsonBuilder()
+            def root = jsonBuilder.sponsors {
+                sponsor data.collect {
+                    [name       : it.name,
+                     website    : it.website,
+                     description: it.description]
+                }
+            }
+            render root as JSON
         }
     }
 }

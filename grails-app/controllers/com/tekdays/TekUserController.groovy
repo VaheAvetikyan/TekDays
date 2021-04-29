@@ -2,6 +2,7 @@ package com.tekdays
 
 import grails.converters.JSON
 import grails.transaction.Transactional
+import groovy.json.JsonBuilder
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -13,7 +14,7 @@ class TekUserController {
     // Logger instance
     private static final Logger LOGGER = LoggerFactory.getLogger(TekUserController.class)
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", apiData: "GET"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -163,10 +164,28 @@ class TekUserController {
     def apiData() {
         def data = TekUser.get(params.id)
         if (data) {
-            render data as JSON
+            def builder = new JsonBuilder()
+            def root = builder.user {
+                fullName data.fullName
+                userName data.userName
+                email data.email
+                website data.website
+                bio data.bio
+            }
+            render root as JSON
         } else {
             data = TekUser.list()
-            render data as JSON
+            def builder = new JsonBuilder()
+            def root = builder.tekUsers {
+                user data.collect {
+                    [fullName: it.fullName,
+                     userName: it.userName,
+                     email   : it.email,
+                     website : it.website,
+                     bio     : it.bio]
+                }
+            }
+            render root as JSON
         }
     }
 }
