@@ -113,6 +113,9 @@
         <g:jasperCustom entityName="TekEvent"/>
     </div>
 
+    <div class="page-body">
+        <g:jasperMail/>
+    </div>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>

@@ -126,6 +126,10 @@
         <g:jasperCustom entityName="Task"/>
     </div>
 
+    <div class="page-body">
+        <g:jasperMail/>
+    </div>
+
     <table class="compact cell-border hover" id="dt">
         <thead>
         <tr>

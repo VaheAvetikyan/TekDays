@@ -1,6 +1,10 @@
 package com.tekdays
 
+import grails.plugin.mail.MailService
 import grails.transaction.Transactional
+import org.codehaus.groovy.grails.plugins.jasper.JasperExportFormat
+import org.codehaus.groovy.grails.plugins.jasper.JasperReportDef
+import org.codehaus.groovy.grails.plugins.jasper.JasperService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -12,7 +16,9 @@ class TaskController {
     // Logger instance
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskController.class)
 
-    def datatablesSourceService
+    DatatablesSourceService datatablesSourceService
+    JasperService jasperService
+    MailService mailService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -26,6 +32,18 @@ class TaskController {
         def propertiesToRender = ["title", "assignedTo", "dueDate", "completed", "notes", "event", "id", "id", "assignedToId", "eventId"]
         def entityName = Task.class.simpleName
         render datatablesSourceService.dataTablesSource(propertiesToRender, entityName, params)
+    }
+
+    def sendJasperEmail(String format) {
+        def report = jasperService.generateReport(new JasperReportDef(name: Task.class.simpleName, fileFormat: JasperExportFormat."${format}_FORMAT"))
+        mailService.sendMail {
+            multipart true
+            to session.user.email
+            subject "TekDays.com ${Task.class.simpleName} Report"
+            html g.render(template: "../jasperMail")
+            attachBytes "${Task.class.simpleName}List.${format.toLowerCase()}", "application/${format.toLowerCase()}", report.toByteArray()
+        }
+        redirect action: "index"
     }
 
     def show(Task taskInstance) {

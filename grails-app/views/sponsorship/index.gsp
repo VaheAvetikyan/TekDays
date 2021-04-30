@@ -27,7 +27,11 @@
     </g:if>
 
     <div class="page-body">
-        <g:jasperCustom entityName="${entityName}"/>
+        <g:jasperCustom entityName="Sponsorship"/>
+    </div>
+
+    <div class="page-body">
+        <g:jasperMail/>
     </div>
 
     <table>

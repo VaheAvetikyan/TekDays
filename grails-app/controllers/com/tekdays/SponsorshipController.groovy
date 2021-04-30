@@ -1,19 +1,38 @@
 package com.tekdays
 
 import grails.converters.JSON
+import grails.plugin.mail.MailService
 import grails.transaction.Transactional
 import groovy.json.JsonBuilder
+import org.codehaus.groovy.grails.plugins.jasper.JasperExportFormat
+import org.codehaus.groovy.grails.plugins.jasper.JasperReportDef
+import org.codehaus.groovy.grails.plugins.jasper.JasperService
 
 import static org.springframework.http.HttpStatus.*
 
 @Transactional(readOnly = true)
 class SponsorshipController {
 
+    JasperService jasperService
+    MailService mailService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", apiData: "GET"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Sponsorship.list(params), model: [sponsorshipInstanceCount: Sponsorship.count()]
+    }
+
+    def sendJasperEmail(String format) {
+        def report = jasperService.generateReport(new JasperReportDef(name: Sponsorship.class.simpleName, fileFormat: JasperExportFormat."${format}_FORMAT"))
+        mailService.sendMail {
+            multipart true
+            to session.user.email
+            subject "TekDays.com ${Sponsorship.class.simpleName} Report"
+            html g.render(template: "../jasperMail")
+            attachBytes "${Sponsorship.class.simpleName}List.${format.toLowerCase()}", "application/${format.toLowerCase()}", report.toByteArray()
+        }
+        redirect action: "index"
     }
 
     def show(Sponsorship sponsorshipInstance) {

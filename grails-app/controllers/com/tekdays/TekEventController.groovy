@@ -5,6 +5,9 @@ import grails.plugin.mail.MailService
 import grails.rest.RestfulController
 import grails.transaction.Transactional
 import groovy.json.JsonBuilder
+import org.codehaus.groovy.grails.plugins.jasper.JasperExportFormat
+import org.codehaus.groovy.grails.plugins.jasper.JasperReportDef
+import org.codehaus.groovy.grails.plugins.jasper.JasperService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -16,9 +19,10 @@ class TekEventController extends RestfulController {
     // Logger instance
     private static final Logger LOGGER = LoggerFactory.getLogger(TekEventController.class)
 
-    def taskService
-    def datatablesSourceService
+    TaskService taskService
+    DatatablesSourceService datatablesSourceService
     MailService mailService
+    JasperService jasperService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", revisions: "PUT", apiData: "GET"]
 
@@ -33,6 +37,18 @@ class TekEventController extends RestfulController {
         def propertiesToRender = ["name", "city", "venue", "startDate", "endDate", "description", "organizer", "id", "id", "organizerId"]
         def entityName = TekEvent.class.simpleName
         render datatablesSourceService.dataTablesSource(propertiesToRender, entityName, params)
+    }
+
+    def sendJasperEmail(String format) {
+        def report = jasperService.generateReport(new JasperReportDef(name: TekEvent.class.simpleName, fileFormat: JasperExportFormat."${format}_FORMAT"))
+        mailService.sendMail {
+            multipart true
+            to session.user.email
+            subject "TekDays.com ${Sponsor.class.simpleName} Report"
+            html g.render(template: "../jasperMail")
+            attachBytes "${TekEvent.class.simpleName}List.${format.toLowerCase()}", "application/${format.toLowerCase()}", report.toByteArray()
+        }
+        redirect action: "index"
     }
 
     def show(Long id) {

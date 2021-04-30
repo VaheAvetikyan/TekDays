@@ -4,6 +4,7 @@
 <head>
     <meta name="layout" content="main">
     <g:set var="entityName" value="${message(code: 'sponsor.label', default: 'Sponsor')}"/>
+    <g:javascript library="jquery"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
 </head>
 
@@ -27,7 +28,11 @@
     </g:if>
 
     <div class="page-body">
-        <g:jasperCustom entityName="${entityName}"/>
+        <g:jasperCustom entityName="Sponsor"/>
+    </div>
+
+    <div class="page-body">
+        <g:jasperMail/>
     </div>
 
     <table>
