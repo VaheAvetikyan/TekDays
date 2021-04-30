@@ -15,7 +15,7 @@ class SecurityFilters {
                 if (!controllerName) {
                     return true
                 }
-                def allowedActions = ['show', 'index', 'login', 'register',
+                def allowedActions = ['show', 'index', 'login', 'register', 'registerNewUser',
                                       'validate', 'dataTablesRenderer', 'apiData']
                 if (!session.user && !allowedActions.contains(actionName) ||
                         !session.user && controllerName == 'tekMessage') {

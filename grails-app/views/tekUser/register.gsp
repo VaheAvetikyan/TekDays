@@ -32,7 +32,7 @@
             </g:eachError>
         </ul>
     </g:hasErrors>
-    <g:form url="[resource: tekUserInstance, action: 'save']">
+    <g:form url="[resource: tekUserInstance, action: 'registerNewUser']">
         <fieldset class="form">
             <g:render template="form"/>
         </fieldset>

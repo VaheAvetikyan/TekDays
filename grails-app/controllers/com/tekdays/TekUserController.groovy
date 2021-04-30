@@ -83,7 +83,7 @@ class TekUserController {
     }
 
     @Transactional
-    def save(TekUser tekUserInstance) {
+    def registerNewUser(TekUser tekUserInstance) {
         if (tekUserInstance == null) {
             notFound()
             return

@@ -8,7 +8,7 @@ class UserRevisionListener implements RevisionListener {
     void newRevision(Object entity) {
         UserRevisionEntity userRevisionEntity = (UserRevisionEntity) entity
         def session = WebUtils.retrieveGrailsWebRequest().session
-        TekUser user = session.user
+        TekUser user = session.user ?: TekUser.findByUserName("admin")
         userRevisionEntity.currentUser = user
     }
 }
