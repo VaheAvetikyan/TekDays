@@ -34,6 +34,9 @@ class TekEventController extends RestfulController {
     }
 
     def dataTablesRenderer() {
+        // Log the rendering of Datatables
+        LOGGER.info("Datatables for TekEvent is loaded")
+
         def propertiesToRender = ["name", "city", "venue", "startDate", "endDate", "description", "organizer", "id", "id", "organizerId"]
         def entityName = TekEvent.class.simpleName
         render datatablesSourceService.dataTablesSource(propertiesToRender, entityName, params)
@@ -48,6 +51,10 @@ class TekEventController extends RestfulController {
             html g.render(template: "../jasperMail")
             attachBytes "${TekEvent.class.simpleName}List.${format.toLowerCase()}", "application/${format.toLowerCase()}", report.toByteArray()
         }
+
+        // Log email
+        LOGGER.info("Events {} report was sent to {}", format, session.user.email)
+
         redirect action: "index"
     }
 
@@ -96,7 +103,7 @@ class TekEventController extends RestfulController {
         tekEventInstance.save flush: true
 
         // Logger for event creation
-        LOGGER.info("Event with name: ${tekEventInstance?.name} created")
+        LOGGER.info("Event with name: {} created", tekEventInstance?.name)
 
         mailService.sendMail {
             to session.user.email
@@ -163,6 +170,9 @@ class TekEventController extends RestfulController {
 
         tekEventInstance.delete flush: true
 
+        // Deletion of event
+        LOGGER.info("Event with name: {} deleted", tekEventInstance?.name)
+
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'tekEvent.label', default: 'TekEvent'), tekEventInstance.id])
@@ -175,6 +185,8 @@ class TekEventController extends RestfulController {
     // Check if current user is the organizer of the event
     private boolean validateOrganizer(TekEvent tekEventInstance) {
         if (TekUser.get(session.user?.id) == tekEventInstance?.organizer) {
+            // Log the validation
+            LOGGER.info("Organizer of {} is validated: {}", tekEventInstance?.name, session.user.fullName)
             return true
         }
         return false

@@ -14,7 +14,7 @@ class TekUserController {
     // Logger instance
     private static final Logger LOGGER = LoggerFactory.getLogger(TekUserController.class)
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", apiData: "GET"]
+    static allowedMethods = [registerNewUser: "POST", update: "PUT", delete: "DELETE", apiData: "GET"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -58,7 +58,7 @@ class TekUserController {
             session.user = user
 
             // Show login info in log
-            LOGGER.info("Successfully logged in user: ${user.fullName}")
+            LOGGER.info("Successfully logged in user: {}", user.fullName)
 
             if (params.cName) {
 
@@ -95,6 +95,9 @@ class TekUserController {
         }
 
         tekUserInstance.save flush: true
+
+        // Registration info in log
+        LOGGER.info("Registered new user: {}", tekUserInstance.fullName)
 
         request.withFormat {
             form multipartForm {
@@ -141,6 +144,9 @@ class TekUserController {
         }
 
         tekUserInstance.delete flush: true
+
+        // Deletion info in log
+        LOGGER.info("Deleted user: {}", tekUserInstance.fullName)
 
         request.withFormat {
             form multipartForm {

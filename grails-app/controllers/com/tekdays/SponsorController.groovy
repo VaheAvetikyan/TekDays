@@ -7,11 +7,16 @@ import groovy.json.JsonBuilder
 import org.codehaus.groovy.grails.plugins.jasper.JasperExportFormat
 import org.codehaus.groovy.grails.plugins.jasper.JasperReportDef
 import org.codehaus.groovy.grails.plugins.jasper.JasperService
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 import static org.springframework.http.HttpStatus.*
 
 @Transactional(readOnly = true)
 class SponsorController {
+
+    // Logger instance
+    private static final Logger LOGGER = LoggerFactory.getLogger(SponsorController.class)
 
     JasperService jasperService
     MailService mailService
@@ -32,6 +37,10 @@ class SponsorController {
             html g.render(template: "../jasperMail")
             attachBytes "${Sponsor.class.simpleName}List.${format.toLowerCase()}", "application/${format.toLowerCase()}", report.toByteArray()
         }
+
+        // Log email
+        LOGGER.info("Sponsors {} report was sent to {}", format, session.user.email)
+
         redirect action: "index"
     }
 
@@ -125,6 +134,7 @@ class SponsorController {
     def fetchSponsorImage() {
         def sponsor = Sponsor.findByName(params.name)
         byte[] imageInByte = sponsor.logo
+        LOGGER.info("{} logo is fetched as image", sponsor.name)
         response.contentType = 'image/png' // or the appropriate image content type
         response.outputStream << imageInByte
         response.outputStream.flush()
