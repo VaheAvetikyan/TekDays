@@ -14,7 +14,7 @@ class TekUserController {
     // Logger instance
     private static final Logger LOGGER = LoggerFactory.getLogger(TekUserController.class)
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", apiData: "GET"]
+    static allowedMethods = [registerNewUser: "POST", update: "PUT", delete: "DELETE", apiData: "GET"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
