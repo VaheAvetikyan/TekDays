@@ -43,13 +43,14 @@ class TaskController {
             html g.render(template: "../jasperMail")
             attachBytes "${Task.class.simpleName}List.${format.toLowerCase()}", "application/${format.toLowerCase()}", report.toByteArray()
         }
+
+        // Log email
+        LOGGER.info("Tasks {} report was sent to {}", format, session.user.email)
+
         redirect action: "index"
     }
 
     def show(Task taskInstance) {
-        // Logger for showing taskInstance
-        LOGGER.info("Trying to show taskInstance with id: {} title: {}", taskInstance?.id, taskInstance?.title)
-
         respond taskInstance
     }
 

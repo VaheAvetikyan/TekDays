@@ -3,13 +3,15 @@ package com.tekdays
 import grails.transaction.Transactional
 import org.hibernate.SessionFactory
 import org.hibernate.envers.AuditReaderFactory
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 @Transactional
 class RevisionsService {
-    SessionFactory sessionFactory
+    // Logger instance
+    private static final Logger LOGGER = LoggerFactory.getLogger(RevisionsService.class)
 
-    def serviceMethod() {
-    }
+    SessionFactory sessionFactory
 
     def getRevisionResults(Class<?> className, Long id) {
         def revisionList = []
@@ -23,6 +25,7 @@ class RevisionsService {
                         revisionList << it
                     }
                 }
+        LOGGER.info("Revision list retrieved for {}, id {}", className, id)
         return revisionList
     }
 
@@ -38,6 +41,7 @@ class RevisionsService {
                         revisionList << it
                     }
                 }
+        LOGGER.info("Revision list retrieved for {}, id {}", className, id)
         return revisionList
     }
 }

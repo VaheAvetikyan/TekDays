@@ -7,11 +7,16 @@ import groovy.json.JsonBuilder
 import org.codehaus.groovy.grails.plugins.jasper.JasperExportFormat
 import org.codehaus.groovy.grails.plugins.jasper.JasperReportDef
 import org.codehaus.groovy.grails.plugins.jasper.JasperService
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 import static org.springframework.http.HttpStatus.*
 
 @Transactional(readOnly = true)
 class SponsorshipController {
+
+    // Logger instance
+    private static final Logger LOGGER = LoggerFactory.getLogger(SponsorshipController.class)
 
     JasperService jasperService
     MailService mailService
@@ -32,6 +37,10 @@ class SponsorshipController {
             html g.render(template: "../jasperMail")
             attachBytes "${Sponsorship.class.simpleName}List.${format.toLowerCase()}", "application/${format.toLowerCase()}", report.toByteArray()
         }
+
+        // Log email
+        LOGGER.info("Sponsorships {} report was sent to {}", format, session.user.email)
+
         redirect action: "index"
     }
 
